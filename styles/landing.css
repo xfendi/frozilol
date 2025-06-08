@@ -72,10 +72,49 @@ section {
   border-radius: 12px;
 }
 
+:root {
+  --color-red: #ff4d4d;
+  --color-red-dark: #e60000;
+
+  --color-yellow: #ffcc00;
+  --color-yellow-dark: #e6b800;
+
+  --color-green: #4caf50;
+  --color-green-dark: #388e3c;
+
+  --color-pink: #ff66b2;
+  --color-pink-dark: #e60073;
+}
+
 .feature-icon {
   background-color: var(--color-primary);
   border: 2px solid var(--color-primary-dark);
   border-radius: 12px;
+}
+
+.feature-icon_blue {
+  background-color: var(--color-primary);
+  border: 2px solid var(--color-primary-dark);
+}
+
+.feature-icon_red {
+  background-color: var(--color-red);
+  border: 2px solid var(--color-red-dark);
+}
+
+.feature-icon_yellow {
+  background-color: var(--color-yellow);
+  border: 2px solid var(--color-yellow-dark);
+}
+
+.feature-icon_green {
+  background-color: var(--color-green);
+  border: 2px solid var(--color-green-dark);
+}
+
+.feature-icon_pink {
+  background-color: var(--color-pink);
+  border: 2px solid var(--color-pink-dark);
 }
 
 .card {

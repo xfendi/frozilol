@@ -1,0 +1,61 @@
+export const products = [
+  {
+    icon: "🔑",
+    color: "blue",
+    gift: true,
+    name: "Beta Access",
+    description: "Get early access to platform and new features.",
+    price: "2,99",
+    features: [
+      "Early Access to Platform",
+      "Exclusive Updates",
+      "Priority Support",
+      "Help Shape the Future of the Platform",
+    ],
+  },
+  {
+    icon: "💎",
+    color: "pink",
+    gift: true,
+    name: "Premium",
+    description:
+      "The perfect plan to discover your creativity & unlock more features.",
+    price: "5,99",
+    features: [
+      "Exclusive Badge",
+      "Profile Layouts",
+      "Custom Fonts",
+      "Special Profile Effects",
+      "Metadata & SEO Customization",
+      "Subpages & More Functions",
+    ],
+  },
+  {
+    icon: "💝",
+    color: "red",
+    gift: false,
+    name: "Donator Badge",
+    description: "Support the project and get a special badge on your profile.",
+    price: "10,99",
+    features: [
+      "Special Donator Badge",
+      "Support the project",
+      "Help us grow and improve",
+      "Get access to exclusive updates",
+    ],
+  },
+  {
+    icon: "💸",
+    color: "green",
+    gift: false,
+    name: "Rich Badge",
+    description: "Show off your wealth with a special badge on your profile.",
+    price: "50,99",
+    features: [
+      "Special Rich Badge",
+      "Show off your wealth",
+      "Get access to exclusive updates",
+      "Support the project",
+    ],
+  },
+];

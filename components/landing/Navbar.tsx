@@ -62,8 +62,8 @@ const NavBar = () => {
             </a>
           </li>
           <li>
-            <Link href="/pricing" className="navbar-link">
-              Pricing
+            <Link href="/shop" className="navbar-link">
+              Shop
             </Link>
           </li>
           <Link href="/register" className="btn-primary">
