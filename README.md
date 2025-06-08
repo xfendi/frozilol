@@ -19,4 +19,4 @@ It’s fully responsive, fast, and built with modern web technologies to keep th
 ## 📬 Contact
 Want your own setup like this? DM me on Discord.
 
-Made with 💙 by [Fendziorr](https://github.com/twoj-nick)
+Made with 💙 by [fendziorr](https://github.com/xfendi)
