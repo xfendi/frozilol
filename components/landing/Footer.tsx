@@ -4,12 +4,13 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer>
-      <div className="footer-container">
+    <footer className="md:!p-5 !p-0 !py-[32px]">
+      <div className="footer-container flex flex-col md:flex-row gap-8 md:!px-10 !p-0">
         <div className="flex items-center gap-2">
           <Image
             src="/images/main-cube.png"
             alt="frozi.lol"
+            className="md:flex hidden"
             width={15}
             height={15}
           />
@@ -17,7 +18,8 @@ const Footer = () => {
             frozi.lol 2025 — All rights reserved
           </div>
         </div>
-        <div className="flex items-center gap-[32px]">
+        <div className="divider md:hidden flex w-full"></div>
+        <div className="flex md:flex-row flex-col items-center gap-8">
           {footerlinks.map((link, index) => (
             <a
               key={index}

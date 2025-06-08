@@ -18,7 +18,7 @@ const Pricing = () => {
         <br />
         your unique bio-page today!
       </div>
-      <div className="section-main flex gap-[32px]">
+      <div className="section-main flex md:flex-row flex-col gap-[32px]">
         {plans.map((plan, index) => (
           <div
             key={index}

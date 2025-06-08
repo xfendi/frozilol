@@ -10,6 +10,8 @@ import "@/styles/landing.css";
 
 import NavBar from "@/components/landing/Navbar";
 import { AuthData } from "@/context/authContext";
+import Hero from "@/components/landing/Hero";
+import Footer from "@/components/landing/Footer";
 
 const ProductPage = ({
   params,
@@ -43,13 +45,13 @@ const ProductPage = ({
       <NavBar />
 
       <section data-aos="fade-up">
-        <div className="flex">
+        <div className="flex md:flex-row flex-col">
           <div
-            className={`flex-1 feature-icon_${product.color} rounded-l-[12px] text-5xl flex justify-center items-center`}
+            className={`flex-1 feature-icon_${product.color} md:rounded-l-[12px] md:rounded-t-none rounded-t-[12px] text-5xl flex justify-center items-center min-h-[200px]`}
           >
             {product.icon}
           </div>
-          <div className="flex-1 feature card !rounded-l-none !border-l-none">
+          <div className="flex-1 feature card md:!rounded-l-none md:!border-l-none md:!rounded-t-[12px] !rounded-t-none">
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-2">
                 <div className="feature-title max-w-sm text-2xl font-bold">
@@ -95,7 +97,7 @@ const ProductPage = ({
                         </svg>
                       </span>
                       <span className="text-[16px] !font-light">
-                        Buy as a gift code for someone else 🎁
+                        Buy as a gift code 🎁
                       </span>
                     </label>
                   </div>
@@ -115,6 +117,9 @@ const ProductPage = ({
           </div>
         </div>
       </section>
+
+      <Hero />
+      <Footer />
     </div>
   );
 };

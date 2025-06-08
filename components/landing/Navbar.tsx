@@ -1,13 +1,16 @@
 "use client";
 
+import { AuthData } from "@/context/authContext";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { BiMenu } from "react-icons/bi";
+import { LuMenu } from "react-icons/lu";
 
 const NavBar = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [showMenu, setShowMenu] = useState(false);
+
+  const { user } = AuthData();
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -32,19 +35,23 @@ const NavBar = () => {
         onClick={() => setShowMenu(true)}
         className={width < 768 ? "flex" : "hidden"}
       >
-        <BiMenu />
+        <LuMenu size={30} />
       </button>
       <div
         className={`!flex ${
           width < 768
-            ? "absolute pointer-events-none top-0 left-0 right-0 bottom-0 hidden opacity-0"
+            ? "absolute pointer-events-none top-0 left-0 right-0 bottom-0 hidden opacity-0 h-screen"
             : "opacity-100"
         } ${
-          width < 768 &&
-          showMenu &&
-          "opacity-100 bg-[rgba(0,0,0,0.9)] z-50 !pointer-events-auto"
+          width < 768 && showMenu && "opacity-100 z-50 !pointer-events-auto"
         } transition-all duration-300`}
       >
+        {width < 768 && showMenu && (
+          <div
+            className="bg-[rgba(0,0,0,0.9)] fixed top-0 left-0 right-0 bottom-0"
+            onClick={() => setShowMenu(false)}
+          ></div>
+        )}
         <ul
           className={`${
             width < 768 &&
@@ -66,9 +73,20 @@ const NavBar = () => {
               Shop
             </Link>
           </li>
-          <Link href="/register" className="btn-primary">
-            Get Started
-          </Link>
+          {user ? (
+            <Link href="/dashboard" className="btn-primary">
+              Dashboard
+            </Link>
+          ) : (
+            <>
+              <Link href="/login" className="navbar-link">
+                Login
+              </Link>
+              <Link href="/register" className="btn-primary">
+                Get Started
+              </Link>
+            </>
+          )}
         </ul>
       </div>
     </nav>
