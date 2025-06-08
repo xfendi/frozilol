@@ -1,0 +1,128 @@
+.navbar-link {
+  padding: 7px 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-default);
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-link:hover {
+  background-color: var(--color-opacity);
+}
+
+section,
+nav {
+  padding: 40px;
+
+  max-width: 72rem;
+
+  margin: auto;
+}
+
+footer {
+  padding: 20px;
+  width: 100%;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 40px;
+  padding-right: 40px;
+  max-width: 72rem !important;
+  margin: auto;
+}
+
+section {
+  padding-top: 200px;
+  padding-bottom: 200px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media screen and (max-width: 768px) {
+  section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+
+.claim-input_body {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 7px 11px;
+  background-color: var(--color-lite-black);
+  border: 2px solid var(--border-secondary);
+  outline: none;
+  border-radius: 12px;
+}
+
+.feature {
+  padding: 40px;
+  background-color: var(--color-lite-black);
+  border: 2px solid var(--border-secondary);
+  outline: none;
+  border-radius: 12px;
+}
+
+.feature-icon {
+  background-color: var(--color-primary);
+  border: 2px solid var(--color-primary-dark);
+  border-radius: 12px;
+}
+
+.card {
+  position: relative;
+}
+
+.card:hover {
+  --active: 1;
+}
+
+.card:after {
+  content: "";
+  position: absolute;
+  border-radius: 11px;
+  inset: 0;
+  background: radial-gradient(
+    circle at calc(var(--x) * 1px) calc(var(--y) * 1px),
+    rgba(255, 255, 255, 0.05),
+    transparent 15vmin
+  );
+  background-attachment: fixed;
+  opacity: var(--active, 0);
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.hero-box {
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.hero {
+  background: radial-gradient(
+    circle at 50% bottom,
+    rgba(77, 166, 255, 0.3),
+    var(--color-lite-black),
+    var(--color-lite-black)
+  );
+}
+
+footer {
+  border-top: 2px solid var(--border-secondary);
+}
