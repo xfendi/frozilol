@@ -1,5 +1,6 @@
 export const products = [
   {
+    id: 1,
     icon: "🔑",
     color: "blue",
     gift: true,
@@ -14,6 +15,7 @@ export const products = [
     ],
   },
   {
+    id: 2,
     icon: "💎",
     color: "pink",
     gift: true,
@@ -31,6 +33,7 @@ export const products = [
     ],
   },
   {
+    id: 3,
     icon: "💝",
     color: "red",
     gift: false,
@@ -45,6 +48,7 @@ export const products = [
     ],
   },
   {
+    id: 4,
     icon: "💸",
     color: "green",
     gift: false,

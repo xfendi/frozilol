@@ -12,6 +12,7 @@ import NavBar from "@/components/landing/Navbar";
 import { AuthData } from "@/context/authContext";
 import Hero from "@/components/landing/Hero";
 import Footer from "@/components/landing/Footer";
+import toast from "react-hot-toast";
 
 const ProductPage = ({
   params,
@@ -19,6 +20,7 @@ const ProductPage = ({
   params: Promise<{ "product-name": string }>;
 }) => {
   const [isGift, setIsGift] = useState(false);
+  const [giftEmail, setGiftEmail] = useState("");
 
   const { user } = AuthData();
   const resolvedParams = use(params);
@@ -30,14 +32,49 @@ const ProductPage = ({
 
   if (!product) notFound();
 
-  const handleBuy = () => {
-    if (isGift) {
-      // Handle gift purchase logic here
-      console.log("Gift code purchased for:", product.name);
-    } else if (user) {
-      // Handle use purchase logic here
-      console.log("Product:", product.name, "purchased by user:", user.email);
+  const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGiftEmail(e.target.value);
+  };
+
+  const handleBuy = async () => {
+    if (isGift && !giftEmail) return toast.error("Please enter a gift email.");
+
+    let body = {
+      isGift,
+      giftEmail,
+      product,
+      userId: "",
+    };
+
+    if (!isGift) body = { ...body, userId: user?.uid };
+
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        // Przekieruj usera do Stripe checkout
+        window.location.href = data.url;
+      } else {
+        toast.error("Something went wrong, please try again later.");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error creating payment session.");
     }
+  };
+
+  const BuyBtn = () => {
+    return (
+      <button onClick={handleBuy} className="btn-light">
+        ${product.price} - Buy Now
+      </button>
+    );
   };
 
   return (
@@ -103,15 +140,33 @@ const ProductPage = ({
                   </div>
                 </div>
               )}
+
               {!user && !isGift && (
                 <Link href="/login" className="btn-light">
                   Login
                 </Link>
               )}
+
+              {user && !isGift && <BuyBtn />}
+
               {isGift && (
-                <button onClick={handleBuy} className="btn-light">
-                  ${product.price} - Buy Now
-                </button>
+                <>
+                  <div className="divider"></div>
+                  <div className="flex flex-col gap-1">
+                    <span>Email to send gift code!</span>
+                    <div className="claim-input_body">
+                      <input
+                        type="email"
+                        id="email"
+                        placeholder="example@frozi.lol"
+                        value={giftEmail}
+                        onChange={handleEmailInputChange}
+                        className="focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                  <BuyBtn />
+                </>
               )}
             </div>
           </div>
