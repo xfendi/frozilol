@@ -1,19 +1,27 @@
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase";
-import { doc, setDoc } from "firebase/firestore";
 
-const generateCode = (length = 10): string => {
+const generateUniqueCode = async (length = 10): Promise<string> => {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let code = "";
 
-  for (let i = 0; i < length; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  while (true) {
+    let code = "";
+
+    for (let i = 0; i < length; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    const docRef = doc(db, "codes", code);
+    const docSnap = await getDoc(docRef);
+
+    if (!docSnap.exists()) {
+      return code;
+    }
   }
-
-  return code;
 };
 
 export const generateGiftCode = async (productId: number) => {
-  const code = generateCode();
+  const code = await generateUniqueCode();
 
   const giftCodeData = {
     code,
