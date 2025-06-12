@@ -1,11 +1,11 @@
 export const footerlinks = [
   {
     name: "Privacy Policy",
-    href: "/privacy-policy",
+    href: "/privacy",
   },
   {
     name: "Terms of Service",
-    href: "/terms-of-service",
+    href: "/terms",
   },
   {
     name: "Support",
