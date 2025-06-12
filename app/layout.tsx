@@ -10,18 +10,15 @@ import "@/app/globals.css";
 export const metadata: Metadata = {
   title: "frozi.lol",
   description:
-    "frozi.lol is your go-to for modern, customizable biolinks and fast, secure file hosting. Build your own link hub in seconds. Everything you need — right here.",
+    "frozi.lol is your essential platform for creating modern, customizable bio-pages to meet all your digital needs.",
   keywords: [
     "biolink tool",
     "create bio page",
-    "file hosting",
     "link in bio",
     "frozi",
     "frozi.lol",
     "custom biolinks",
     "free biolink website",
-    "host files online",
-    "guns.lol alternative",
   ],
   robots: { index: true, follow: true },
   authors: [{ name: "frozi.lol Team", url: "https://frozi.lol" }],
@@ -29,9 +26,9 @@ export const metadata: Metadata = {
   publisher: "frozi.lol",
   metadataBase: new URL("https://frozi.lol"),
   openGraph: {
-    title: "frozi.lol | Build Biolinks. Host Files. Done Right.",
+    title: "frozi.lol – Your Biolink",
     description:
-      "frozi.lol lets you create clean, modern biolinks and host your files – all in one place. No clutter, just what you need.",
+      "frozi.lol is your essential platform for creating modern, customizable bio-pages to meet all your digital needs.",
     url: "https://frozi.lol",
     type: "website",
     siteName: "frozi.lol",
@@ -40,9 +37,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@frozi",
     creator: "@frozi",
-    title: "frozi.lol – Your Biolink & File Hub",
+    title: "frozi.lol – Your Biolink",
     description:
-      "Create beautiful biolinks, share your socials, and host files securely with frozi.lol. Everything you want, right here.",
+      "frozi.lol is your essential platform for creating modern, customizable bio-pages to meet all your digital needs.",
   },
 };
 
