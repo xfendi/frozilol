@@ -2,7 +2,7 @@ export default interface Product {
   id: number;
   icon: string;
   color: string;
-  gift: false;
+  gift: boolean;
   name: string;
   description: string;
   price: string; // Price in USD
