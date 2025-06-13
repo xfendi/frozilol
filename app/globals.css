@@ -126,7 +126,7 @@ body {
 .btn-light,
 .btn-primary,
 .btn-brand {
-  padding: 7px 15px;
+  padding: 8px 16px;
   outline: none;
   border: none;
   border-radius: 10px;
@@ -203,7 +203,7 @@ body {
 }
 
 .loader {
-  width: 42px;
+  width: 48px;
   aspect-ratio: 2;
   --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
   background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;

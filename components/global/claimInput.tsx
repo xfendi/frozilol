@@ -10,7 +10,7 @@ const ClaimInput = () => {
   };
   return (
     <div className="flex md:flex-row flex-col gap-[16px] items-center scale-110">
-      <div className="claim-input_body">
+      <div className="input_body">
         <span>frozi.lol/</span>
         <input
           type="text"
@@ -19,9 +19,10 @@ const ClaimInput = () => {
           value={username}
           onChange={handleInputChange}
           className="focus:outline-none"
+          maxLength={20}
         />
       </div>
-      <Link href={`/register?username=${username}`} className="btn-primary md:w-max w-full">
+      <Link href={`/auth/register?username=${username}`} className="btn-primary md:w-max w-full">
         Claim Now
       </Link>
     </div>

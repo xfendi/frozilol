@@ -53,17 +53,6 @@ section {
   }
 }
 
-.claim-input_body {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  padding: 7px 11px;
-  background-color: var(--color-lite-black);
-  border: 2px solid var(--border-secondary);
-  outline: none;
-  border-radius: 12px;
-}
-
 .feature {
   padding: 40px;
   background-color: var(--color-lite-black);

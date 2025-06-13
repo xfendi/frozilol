@@ -6,6 +6,7 @@ import { AuthContextProvider } from "@/context/authContext";
 import AOSInitializer from "@/components/global/AOSinitializer";
 
 import "@/app/globals.css";
+import "@/styles/form.css";
 
 export const metadata: Metadata = {
   title: "frozi.lol",
@@ -44,6 +45,7 @@ export const metadata: Metadata = {
 };
 
 import { Roboto } from "next/font/google";
+import { ProfileContextProvider } from "@/context/profileContext";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -79,7 +81,9 @@ export default function RootLayout({
       <body className={roboto.className}>
         <AOSInitializer />
         <Toaster position="bottom-right" reverseOrder={false} />
-        <AuthContextProvider>{children}</AuthContextProvider>
+        <AuthContextProvider>
+          <ProfileContextProvider>{children}</ProfileContextProvider>
+        </AuthContextProvider>
       </body>
     </html>
   );

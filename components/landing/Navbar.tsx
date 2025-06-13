@@ -59,11 +59,6 @@ const NavBar = () => {
           } font-medium hidden md:flex items-center gap-[16px]`}
         >
           <li>
-            <Link href="/help" className="navbar-link">
-              Help Center
-            </Link>
-          </li>
-          <li>
             <a href="https://dc.frozi.lol" className="navbar-link">
               Discord
             </a>
@@ -79,10 +74,10 @@ const NavBar = () => {
             </Link>
           ) : (
             <>
-              <Link href="/login" className="navbar-link">
+              <Link href="/auth/login" className="navbar-link">
                 Login
               </Link>
-              <Link href="/register" className="btn-primary">
+              <Link href="/auth/register" className="btn-primary">
                 Get Started
               </Link>
             </>

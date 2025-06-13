@@ -58,7 +58,7 @@ const Pricing = () => {
                 ))}
               </div>
             </div>
-            <Link href="/register" className="btn-primary w-full !mt-4">
+            <Link href="/auth/register" className="btn-primary w-full !mt-4">
               Get Started
             </Link>
           </div>

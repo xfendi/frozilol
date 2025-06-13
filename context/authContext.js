@@ -21,19 +21,24 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
-  const createUser = async (email, password, name) => {
-    await createUserWithEmailAndPassword(auth, email, password).then(
-      function () {
-        setDoc(doc(db, "profiles", auth.currentUser?.uid), {
+  const createUser = async (email, password, username, promoCode) => {
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then(function () {
+        let userDoc = {
           createdAt: new Date(),
           email: email,
-          displayName: name,
-        });
+          promoCode,
+          username,
+        };
+
+        setDoc(doc(db, "profiles", username), userDoc);
         updateProfile(auth.currentUser, {
-          displayName: name,
+          displayName: username,
         });
-      }
-    );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const login = (email, password) => {

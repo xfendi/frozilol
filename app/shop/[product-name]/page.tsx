@@ -142,7 +142,7 @@ const ProductPage = ({
               )}
 
               {!user && !isGift && (
-                <Link href="/login" className="btn-light">
+                <Link href="/auth/login" className="btn-light">
                   Login
                 </Link>
               )}
