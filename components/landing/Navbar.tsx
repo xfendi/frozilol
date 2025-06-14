@@ -7,7 +7,17 @@ import React, { useState, useEffect } from "react";
 import { LuMenu } from "react-icons/lu";
 
 const NavBar = () => {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [showMenu, setShowMenu] = useState(false);
 
   const { user } = AuthData();
