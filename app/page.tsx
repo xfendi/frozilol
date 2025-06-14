@@ -21,7 +21,7 @@ const HomePage = () => {
   return (
     <div className="relative w-full">
       <video
-        src="https://r2.guns.lol/237cd63b-cc4b-453e-9bd8-80f644b99b75.mp4"
+        src="https://r2.guns.lol/5085c18c-3016-4479-870a-87da29a7e9de.mp4"
         className="absolute inset-0 w-full !h-[800px] object-cover -z-50 overflow-hidden"
         autoPlay
         loop
