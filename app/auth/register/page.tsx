@@ -65,7 +65,7 @@ const RegisterPage = () => {
 
     try {
       await createUser(email, password, username, promo);
-      router.push("/dashboard");
+      window.location.href = "/dashboard";
     } catch (error: unknown) {
       setIsLoading(false);
 

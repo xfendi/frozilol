@@ -22,27 +22,49 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   const createUser = async (email, password, username, promoCode) => {
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then(function () {
-        let userDoc = {
-          createdAt: new Date(),
-          email: email,
-          promoCode,
-          username,
-        };
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-        setDoc(doc(db, "profiles", username), userDoc);
-        updateProfile(auth.currentUser, {
-          displayName: username,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    let userDoc = {
+      uid: userCredential.user.uid,
+      createdAt: new Date(),
+      email: email,
+      promoCode,
+      username,
+    };
+
+    setDoc(doc(db, "profiles", username), userDoc);
+    updateProfile(userCredential.user, {
+      displayName: username,
+    });
+
+    const idToken = await userCredential.user.getIdToken();
+
+    await fetch("/api/auth/session-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken }),
+    });
   };
 
-  const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+  const login = async (email, password) => {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+
+    const idToken = await user.getIdToken();
+
+    await fetch("/api/auth/session-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken }),
+    });
   };
 
   const handleGoogleLogin = async () => {
@@ -60,7 +82,6 @@ export const AuthContextProvider = ({ children }) => {
   const logout = async () => {
     try {
       await signOut(auth);
-      Cookies.remove("token");
     } catch (e) {
       throw new Error(e);
     }
@@ -69,11 +90,6 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-
-      if (currentUser) {
-        const token = currentUser.uid;
-        Cookies.set("token", token, { path: "/" });
-      }
     });
 
     return () => unsubscribe();

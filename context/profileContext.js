@@ -14,7 +14,7 @@ export const ProfileContextProvider = ({ children }) => {
   const { user } = AuthData();
 
   useEffect(() => {
-    if (!user.displayName) return;
+    if (!user?.displayName) return;
 
     const profileRef = doc(db, "profiles", user.displayName);
     const unsubscribeProfile = onSnapshot(profileRef, (docSnap) => {
@@ -26,7 +26,7 @@ export const ProfileContextProvider = ({ children }) => {
     return () => {
       unsubscribeProfile();
     };
-  }, [user.displayName]);
+  }, [user?.displayName]);
 
   return (
     <ProfileContext.Provider

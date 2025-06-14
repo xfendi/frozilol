@@ -29,7 +29,7 @@ const LoginPage = () => {
 
     try {
       await login(email, password);
-      router.replace("/dashboard");
+      window.location.href = "/dashboard";
     } catch (e: unknown) {
       if (e instanceof Error) {
         setIsLoading(false);
