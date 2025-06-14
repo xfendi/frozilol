@@ -10,6 +10,7 @@ import Loader from "@/components/global/loader";
 import Image from "next/image";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "@/firebase";
+import { pages } from "@/data/names";
 
 interface FirebaseError extends Error {
   code: string;
@@ -31,7 +32,6 @@ const RegisterPage = () => {
   }, [searchParams]);
 
   const { createUser } = AuthData();
-  const router = useRouter();
 
   const onUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -51,7 +51,7 @@ const RegisterPage = () => {
       const userRef = doc(db, "profiles", username);
       const userSnap = await getDoc(userRef);
 
-      if (!username || userSnap.exists()) {
+      if (!username || userSnap.exists() || pages.includes(username)) {
         setIsLoading(false);
         toast.error("Username is already taken.");
         setUsernameTaken(true);
