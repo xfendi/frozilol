@@ -11,6 +11,7 @@ import Image from "next/image";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { pages } from "@/data/names";
+import { validatePromoCode } from "@/lib/other/validatePromoCode";
 
 interface FirebaseError extends Error {
   code: string;
@@ -45,7 +46,7 @@ const RegisterPage = () => {
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    const promo = formData.get("promo");
+    const promo = formData.get("promo") as string;
 
     try {
       const userRef = doc(db, "profiles", username);
@@ -61,6 +62,26 @@ const RegisterPage = () => {
       setIsLoading(false);
       toast.error("Checking username availability failed.");
       return;
+    }
+    
+    if (promo) {
+      if (promo.length < 3) {
+        return toast.error("Promo code must be at least 3 characters long.");
+      }
+
+      const { valid, data, error } = await validatePromoCode(
+        promo.toLowerCase()
+      );
+
+      if (error) {
+        toast.error("Error checking promo code");
+        return;
+      }
+
+      if (!valid) {
+        toast.error("Invalid promo code");
+        return;
+      }
     }
 
     try {

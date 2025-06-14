@@ -6,11 +6,13 @@ import config from "@/config.json";
 export async function createCheckoutSession({
   userId,
   giftEmail,
+  promoCode,
   isGift,
   product,
 }: {
   userId?: string;
   giftEmail?: string;
+  promoCode?: string;
   isGift: boolean;
   product: Product;
 }) {
@@ -21,6 +23,7 @@ export async function createCheckoutSession({
   let metadata = {
     isGift: isGift ? "true" : "false",
     giftEmail: giftEmail ?? "",
+    promoCode: promoCode ?? "",
     productId: product.id,
     userId: userId ?? "",
   };

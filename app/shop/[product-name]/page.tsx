@@ -13,6 +13,7 @@ import { AuthData } from "@/context/authContext";
 import Hero from "@/components/landing/Hero";
 import Footer from "@/components/landing/Footer";
 import toast from "react-hot-toast";
+import { validatePromoCode } from "@/lib/other/validatePromoCode";
 
 const ProductPage = ({
   params,
@@ -21,6 +22,8 @@ const ProductPage = ({
 }) => {
   const [isGift, setIsGift] = useState(false);
   const [giftEmail, setGiftEmail] = useState("");
+
+  const [promoCode, setPromoCode] = useState("");
 
   const { user } = AuthData();
   const resolvedParams = use(params);
@@ -36,14 +39,39 @@ const ProductPage = ({
     setGiftEmail(e.target.value);
   };
 
+  const handlePromoInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPromoCode(e.target.value);
+  };
+
   const handleBuy = async () => {
     if (isGift && !giftEmail) return toast.error("Please enter a gift email.");
+
+    if (promoCode) {
+      if (promoCode.length < 3) {
+        return toast.error("Promo code must be at least 3 characters long.");
+      }
+
+      const { valid, data, error } = await validatePromoCode(
+        promoCode.toLowerCase()
+      );
+
+      if (error) {
+        toast.error("Error checking promo code");
+        return;
+      }
+
+      if (!valid) {
+        toast.error("Invalid promo code");
+        return;
+      }
+    }
 
     let body = {
       isGift,
       giftEmail,
       product,
       userId: "",
+      promoCode: promoCode.toLowerCase() || "",
     };
 
     if (!isGift) body = { ...body, userId: user?.uid };
@@ -58,7 +86,6 @@ const ProductPage = ({
       const data = await res.json();
 
       if (data.url) {
-        // Przekieruj usera do Stripe checkout
         window.location.href = data.url;
       } else {
         toast.error("Something went wrong, please try again later.");
@@ -147,23 +174,48 @@ const ProductPage = ({
                 </Link>
               )}
 
-              {user && !isGift && <BuyBtn />}
+              {user && !isGift && (
+                <>
+                  <div className="input_body">
+                    <input
+                      type="promo"
+                      name="promo"
+                      id="promo"
+                      placeholder="Promo Code (optional)"
+                      value={promoCode}
+                      onChange={handlePromoInputChange}
+                      maxLength={20}
+                      className="focus:outline-none"
+                    />
+                  </div>
+                  <BuyBtn />
+                </>
+              )}
 
               {isGift && (
                 <>
                   <div className="divider"></div>
-                  <div className="flex flex-col gap-1">
-                    <span>Email to send gift code!</span>
-                    <div className="claim-input_body">
-                      <input
-                        type="email"
-                        id="email"
-                        placeholder="example@frozi.lol"
-                        value={giftEmail}
-                        onChange={handleEmailInputChange}
-                        className="focus:outline-none"
-                      />
-                    </div>
+                  <div className="input_body">
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Email for gift code"
+                      value={giftEmail}
+                      onChange={handleEmailInputChange}
+                      className="focus:outline-none"
+                    />
+                  </div>
+                  <div className="input_body">
+                    <input
+                      type="promo"
+                      name="promo"
+                      id="promo"
+                      placeholder="Promo Code (optional)"
+                      value={promoCode}
+                      onChange={handlePromoInputChange}
+                      maxLength={20}
+                      className="focus:outline-none"
+                    />
                   </div>
                   <BuyBtn />
                 </>

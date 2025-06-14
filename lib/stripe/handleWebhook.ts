@@ -2,6 +2,7 @@ import { generateGiftCode } from "../gift/generateGiftCode";
 import { products } from "@/data/products";
 import Product from "@/types/Product";
 import { sendEmail } from "@/lib/email/emailService";
+import { db } from "@/firebase-admin";
 
 const sendThanksEmail = async (email: string, giftEmail?: string) => {
   const mailOptions = {
@@ -40,6 +41,8 @@ export async function handleStripeWebhook(event: any) {
     const giftEmail = session.metadata.giftEmail;
     const purchaseEmail = session.customer_details.email;
 
+    const promoCode = session.metadata.promoCode;
+
     const userId = session.metadata.userId;
     const isGift = session.metadata.isGift === "true";
     const productId = session.metadata.productId;
@@ -52,6 +55,58 @@ export async function handleStripeWebhook(event: any) {
     }
 
     sendThanksEmail(purchaseEmail, giftEmail);
+
+    if (promoCode) {
+      try {
+        const promoCodeDoc = await db
+          .collection("partners")
+          .doc(promoCode)
+          .get();
+
+        if (promoCodeDoc.exists) {
+          const promoData = promoCodeDoc.data();
+
+          if (promoData) {
+            const partnerTransactions = promoData.transactions || [];
+            partnerTransactions.push(session.id);
+            await db
+              .collection("partners")
+              .doc(promoCode)
+              .update({ partnerTransactions });
+            console.log(
+              `Promo code ${promoCode} used for session ${session.id}.`
+            );
+          }
+        } else {
+          console.warn(`Promo code ${promoCode} does not exist.`);
+        }
+      } catch (error) {
+        console.error("Error searching for promo code document:", error);
+        return;
+      }
+    }
+
+    try {
+      await db
+        .collection("transactions")
+        .doc(session.id)
+        .set({
+          createdAt: new Date(),
+          stripeSessionId: session.id,
+          userId: userId || null,
+          productId,
+          amountTotal: session.amount_total / 100,
+          isGift,
+          promoCode: promoCode || null,
+          purchaseEmail,
+          giftEmail: giftEmail || null,
+          status: session.payment_status,
+        });
+
+      console.log("✅ Transaction saved to Firebase.");
+    } catch (err) {
+      console.error("❌ Error saving transaction to Firebase:", err);
+    }
 
     if (isGift) {
       const code = await generateGiftCode(productId);
