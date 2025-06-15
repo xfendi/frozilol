@@ -113,7 +113,7 @@ export async function handleStripeWebhook(event: any) {
       const code = await generateGiftCode(productId);
       sendCodeEmail(giftEmail, code.toString(), product);
     } else {
-      await addProductToUser(productId, userId);
+      await addProductToUser(Number(productId), userId);
     }
   }
 }

@@ -9,43 +9,51 @@ export const addProductToUser = async (productId: number, userId: string) => {
   }
 
   try {
-    const userDoc = db.collection("users").doc(userId);
+    const usersRef = db.collection("profiles");
+    const querySnapshot = await usersRef
+      .where("uid", "==", userId)
+      .limit(1)
+      .get();
 
-    const promoCodeDoc = await userDoc.get();
-
-    if (promoCodeDoc.exists) {
-      const profileData = promoCodeDoc.data();
-
-      if (profileData) {
-        const productsData: number[] = profileData.products || [];
-        productsData.push(productId);
-
-        let updateData = {
-          products: productsData,
-          premium: profileData.premium || false,
-          beta: profileData.beta || false,
-        };
-
-        if (product.name === "Premium") {
-          updateData = {
-            ...updateData,
-            premium: true,
-          };
-        } else if (product.name === "Beta Access") {
-          updateData = {
-            ...updateData,
-            beta: true,
-          };
-        }
-
-        await userDoc.update({ updateData });
-        console.log(`Product ${product.name} added to user ${userId}.`);
-      }
-    } else {
-      console.warn(`User document with ID ${userId} does not exist.`);
+    if (querySnapshot.empty) {
+      console.error("No user found with uid:", userId);
+      return;
     }
+
+    const userDoc = querySnapshot.docs[0];
+    const userDocRef = userDoc.ref;
+
+    const profileData = userDoc.data();
+
+    const productsData: number[] = profileData.products || [];
+    productsData.push(productId);
+
+    let updateData = {
+      products: productsData,
+      premium: profileData.premium || false,
+      beta: profileData.beta || false,
+    };
+
+    if (product.name === "Premium") {
+      updateData = {
+        ...updateData,
+        premium: true,
+      };
+    } else if (product.name === "Beta Access") {
+      updateData = {
+        ...updateData,
+        beta: true,
+      };
+    }
+
+    await userDocRef.update({
+      products: updateData.products,
+      premium: updateData.premium,
+      beta: updateData.beta,
+    });
+    console.log(`Product ${product.name} added to user ${userId}.`);
   } catch (error) {
-    console.error("Error searching for promo code document:", error);
+    console.error("Error searching for profile document:", error);
     return;
   }
 };
