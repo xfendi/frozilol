@@ -49,15 +49,17 @@ const RegisterPage = () => {
     e.preventDefault();
     setIsLoading(true);
 
+    const formatedUsername = username.toLowerCase().replace(/\s+/g, "-");
+
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
     try {
-      const userRef = doc(db, "profiles", username);
+      const userRef = doc(db, "profiles", formatedUsername);
       const userSnap = await getDoc(userRef);
 
-      if (!username || userSnap.exists() || pages.includes(username)) {
+      if (!formatedUsername || userSnap.exists() || pages.includes(formatedUsername)) {
         setIsLoading(false);
         toast.error("Username is already taken.");
         setUsernameTaken(true);
@@ -90,7 +92,7 @@ const RegisterPage = () => {
     }
 
     try {
-      await createUser(email, password, username, promo);
+      await createUser(email, password, formatedUsername, promo);
       window.location.href = "/dashboard";
     } catch (error: unknown) {
       setIsLoading(false);
