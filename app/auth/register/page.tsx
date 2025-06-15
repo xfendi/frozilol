@@ -21,14 +21,20 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [username, setUsername] = useState<string>("");
+  const [promo, setPromo] = useState<string>("");
   const [usernameTaken, setUsernameTaken] = useState<boolean>(false);
 
   const searchParams = useSearchParams();
   const searchUsername = searchParams.get("username");
+  const searchPromo = searchParams.get("promo");
 
   useEffect(() => {
     if (searchUsername) {
       setUsername(searchUsername);
+    }
+
+    if (searchPromo && searchPromo.length >= 3) {
+      setPromo(searchPromo);
     }
   }, [searchParams]);
 
@@ -46,7 +52,6 @@ const RegisterPage = () => {
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    const promo = formData.get("promo") as string;
 
     try {
       const userRef = doc(db, "profiles", username);
@@ -63,7 +68,7 @@ const RegisterPage = () => {
       toast.error("Checking username availability failed.");
       return;
     }
-    
+
     if (promo) {
       if (promo.length < 3) {
         return toast.error("Promo code must be at least 3 characters long.");
@@ -179,6 +184,9 @@ const RegisterPage = () => {
               name="promo"
               id="promo"
               placeholder="Promo Code (optional)"
+              value={promo}
+              onChange={(e) => setPromo(e.target.value)}
+              maxLength={20}
             />
           </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
-import React, { use, useState } from "react";
-import { notFound } from "next/navigation";
+import React, { use, useEffect, useState } from "react";
+import { notFound, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 import { products } from "@/data/products";
@@ -24,6 +24,15 @@ const ProductPage = ({
   const [giftEmail, setGiftEmail] = useState("");
 
   const [promoCode, setPromoCode] = useState("");
+
+  const searchParams = useSearchParams();
+  const searchPromo = searchParams.get("promo");
+
+  useEffect(() => {
+    if (searchPromo && searchPromo.length >= 3) {
+      setPromoCode(searchPromo);
+    }
+  }, [searchParams]);
 
   const { user } = AuthData();
   const resolvedParams = use(params);
@@ -194,7 +203,6 @@ const ProductPage = ({
 
               {isGift && (
                 <>
-                  <div className="divider"></div>
                   <div className="input_body">
                     <input
                       type="email"
