@@ -67,12 +67,12 @@ export async function handleStripeWebhook(event: any) {
           const promoData = promoCodeDoc.data();
 
           if (promoData) {
-            const partnerTransactions = promoData.transactions || [];
-            partnerTransactions.push(session.id);
+            const transactions = promoData.transactions || [];
+            transactions.push(session.id);
             await db
               .collection("partners")
               .doc(promoCode)
-              .update({ partnerTransactions });
+              .update({ transactions });
             console.log(
               `Promo code ${promoCode} used for session ${session.id}.`
             );
