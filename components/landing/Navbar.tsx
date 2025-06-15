@@ -78,6 +78,11 @@ const NavBar = () => {
               Shop
             </Link>
           </li>
+          <li>
+            <Link href="/shop" className="navbar-link">
+              Redeem Code
+            </Link>
+          </li>
           {user ? (
             <Link href="/dashboard" className="btn-primary">
               Dashboard
