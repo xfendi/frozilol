@@ -55,7 +55,7 @@ const ProductPage = ({
 
   const handleBuy = async () => {
     if (!isGift) {
-      const res = await fetch("/api/check-product", {
+      const res = await fetch("/api/product/check", {
         method: "POST",
         body: JSON.stringify({
           userId: user.uid,
