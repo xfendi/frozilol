@@ -14,6 +14,7 @@ import Hero from "@/components/landing/Hero";
 import Footer from "@/components/landing/Footer";
 import toast from "react-hot-toast";
 import { validatePromoCode } from "@/lib/other/validatePromoCode";
+import { checkUserHasProduct } from "@/lib/other/checkUserHasProduct";
 
 const ProductPage = ({
   params,
@@ -53,6 +54,21 @@ const ProductPage = ({
   };
 
   const handleBuy = async () => {
+    if (!isGift) {
+      const res = await fetch("/api/check-product", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: user.uid,
+          productId: Number(product.id),
+        }),
+      });
+      const data = await res.json();
+
+      if (data.hasProduct) {
+        return toast.error("You already own this product.");
+      }
+    }
+
     if (isGift && !giftEmail) return toast.error("Please enter a gift email.");
 
     if (promoCode) {
