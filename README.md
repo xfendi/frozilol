@@ -16,7 +16,8 @@ It’s fully responsive, fast, and built with modern web technologies to keep th
 - TypeScript
 - Vercel for deployment
 
-## 📬 Contact
-Want your own setup like this? DM me on Discord.
+## Info
+Copyright (c) 2025 frozi.lol by fendziorr
+This project is not open-source.
 
 Made with 💙 by [fendziorr](https://github.com/xfendi)
