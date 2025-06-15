@@ -3,6 +3,7 @@ import { products } from "@/data/products";
 import Product from "@/types/Product";
 import { sendEmail } from "@/lib/email/emailService";
 import { db } from "@/firebase-admin";
+import { addProductToUser } from "../other/addProductToUser";
 
 const sendThanksEmail = async (email: string, giftEmail?: string) => {
   const mailOptions = {
@@ -112,7 +113,7 @@ export async function handleStripeWebhook(event: any) {
       const code = await generateGiftCode(productId);
       sendCodeEmail(giftEmail, code.toString(), product);
     } else {
-      console.log(`Add product to user database with id: ${userId}`);
+      await addProductToUser(productId, userId);
     }
   }
 }
