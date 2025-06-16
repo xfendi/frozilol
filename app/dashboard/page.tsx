@@ -23,7 +23,7 @@ const Dashboard = async ({ searchParams }: Props) => {
   const docSnap = await docRef.get();
   const userData = docSnap.data();
 
-  const isPro = userData?.pro || false;
+  const isPro = userData?.premium || false;
 
   type TabType = (typeof tabs)[number];
 
