@@ -1,3 +1,12 @@
-export const tabs = ["overview", "customize", "analytics", "settings"];
+export const tabs = [
+  "overview",
+  "analytics",
+  "customize",
+  "badges",
+  "links",
+  "premium",
+  "templates",
+  "settings",
+];
 
-export const proTabs = ["analytics"];
+export const proTabs = ["premium"];
