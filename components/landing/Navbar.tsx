@@ -79,7 +79,7 @@ const NavBar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/shop" className="navbar-link">
+            <Link href="/shop/redeem" className="navbar-link">
               Redeem Code
             </Link>
           </li>
