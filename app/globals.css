@@ -48,6 +48,7 @@
 
   --color-primary: #4da6ff;
   --color-primary-dark: #4796e6;
+  --color-primary-opacity: rgba(135, 197, 255, 0.2);
 
   --color-purple: #c74dff;
   --color-purple-dark: #b947e6;

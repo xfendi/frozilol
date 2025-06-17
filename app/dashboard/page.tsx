@@ -7,6 +7,9 @@ import OverviewPage from "./pages/overview";
 import NotFoundPage from "@/components/dashboard/other/notFound";
 import NoProPage from "@/components/dashboard/other/noPro";
 
+import "@/styles/dashboard.css";
+import Sidebar from "@/components/dashboard/Sidebar";
+
 type Props = {
   searchParams: Promise<{ tab?: string }>;
 };
@@ -44,7 +47,8 @@ const Dashboard = async ({ searchParams }: Props) => {
   }
 
   return (
-    <div className="app admin">
+    <div className="app flex flex-row">
+      <Sidebar tab={tab} />
       <main className="scrollable-div">{pageToRender}</main>
     </div>
   );
