@@ -10,6 +10,8 @@ import { LuPaintbrush } from "react-icons/lu";
 import { tabs, proTabs } from "@/data/dashboard";
 
 import PremiumPlate from "@/components/global/premiumPlate";
+import Image from "next/image";
+import Cube from "../global/cube";
 
 const Sidebar = async ({ tab }: { tab?: string }) => {
   type TabType = (typeof tabs)[number];
@@ -52,8 +54,10 @@ const Sidebar = async ({ tab }: { tab?: string }) => {
     <aside>
       <nav className="flex flex-col flex-1">
         <div className="sidebar__top">
+          <Cube size={20} />
           <h1 className="text-xl font-semibold">frozi.lol</h1>
         </div>
+        <div className="sidebar__divider"></div>
         <div className="sidebar__nav">
           <ul>
             {tabs.map((tabName) => (

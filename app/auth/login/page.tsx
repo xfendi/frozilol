@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AuthData } from "@/context/authContext";
 import Loader from "@/components/global/loader";
-import Image from "next/image";
+import Cube from "@/components/global/cube";
 
 interface FirebaseError extends Error {
   code: string;
@@ -73,17 +73,7 @@ const LoginPage = () => {
     <section className="form__section">
       <div className="form__box" data-aos="fade-up">
         <div className="form__top">
-          <Link
-            href="/"
-            className="flex items-center gap-2 transition-all duration-300 hover:scale-120 hover:rotate-12"
-          >
-            <Image
-              src="/images/main-cube.png"
-              alt="frozi.lol"
-              width={50}
-              height={50}
-            />
-          </Link>
+          <Cube size={50} />
         </div>
 
         <form onSubmit={HandleSubmit} className="form">

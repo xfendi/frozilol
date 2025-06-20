@@ -1,10 +1,10 @@
 "use client";
 
 import { AuthData } from "@/context/authContext";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { LuMenu } from "react-icons/lu";
+import Cube from "../global/cube";
 
 const NavBar = () => {
   const [width, setWidth] = useState(0);
@@ -30,17 +30,7 @@ const NavBar = () => {
 
   return (
     <nav className="flex justify-between items-center">
-      <Link
-        href="/"
-        className="flex items-center gap-2 transition-all duration-300 hover:scale-120 hover:rotate-12"
-      >
-        <Image
-          src="/images/main-cube.png"
-          alt="frozi.lol"
-          width={30}
-          height={30}
-        />
-      </Link>
+      <Cube size={30} />
       <button
         onClick={() => setShowMenu(true)}
         className={width < 768 ? "flex" : "hidden"}

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Cube from "@/components/global/cube";
 import Link from "next/link";
 import React from "react";
 
@@ -9,17 +9,7 @@ const SuccessPage = () => {
       data-aos="fade-up"
     >
       <div className="form__top">
-        <Link
-          href="/"
-          className="flex items-center gap-2 transition-all duration-300 hover:scale-120 hover:rotate-12"
-        >
-          <Image
-            src="/images/main-cube.png"
-            alt="frozi.lol"
-            width={50}
-            height={50}
-          />
-        </Link>
+        <Cube size={50} />
       </div>
 
       <div className="form__main flex flex-col gap-[16px] items-center text-center justify-center md:max-w-md">
