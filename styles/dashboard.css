@@ -97,23 +97,13 @@ main {
   font-weight: 500;
 }
 
-.sidebar__nav-link.side:hover {
-  color: var(--text-primary);
-  background-color: var(--color-opacity);
-}
-.sidebar__nav-link.active,
-.sidebar__nav-link.side.active {
-  color: var(--text-primary);
-  background-color: var(--color-primary);
-}
-
-.sidebar__nav-link.side {
-  color: var(--text-quaternary);
-}
-
 .sidebar__nav-link:hover {
-  background-color: var(--color-opacity);
   color: var(--text-primary);
+}
+
+.sidebar__nav-link.active {
+  color: var(--text-primary);
+  background-color: var(--color-opacity);
 }
 
 .dashboard__section-header,

@@ -19,7 +19,7 @@ const Sidebar = async ({ tab }: { tab?: string }) => {
     ? (tab as TabType)
     : "overview";
 
-  const ICONS_SIZE = 20;
+  const ICONS_SIZE = 16;
 
   const icons: Record<TabType, React.ReactNode> = {
     overview: <GoHome size={ICONS_SIZE} />,
@@ -36,9 +36,7 @@ const Sidebar = async ({ tab }: { tab?: string }) => {
     return (
       <Link
         href={{ query: { tab: tabName } }}
-        className={`sidebar__nav-link side pro ${
-          currentTab === tabName && "active"
-        }`}
+        className={`sidebar__nav-link ${currentTab === tabName && "active"}`}
       >
         {icons[tabName]}
         <p>{tabName.charAt(0).toUpperCase() + tabName.slice(1)}</p>
