@@ -2,7 +2,6 @@ import { getServerProfile } from "@/lib/data/getServerProfile";
 import { getServerUser } from "@/lib/data/getServerUser";
 import Image from "next/image";
 import React from "react";
-import Cube from "../global/cube";
 
 const ProfileCard = async () => {
   const user = await getServerUser();
@@ -18,13 +17,14 @@ const ProfileCard = async () => {
   }
 
   return (
-    <a className="profile-card_container" href={`/${profile.username}`}>
+    <div className="profile-card_container">
       {user.photoURL ? (
         <Image
           src={user?.photoURL}
-          alt="Profile Card"
-          width={200}
-          height={200}
+          alt={profile.username}
+          className="rounded-lg"
+          width={40}
+          height={40}
         />
       ) : (
         <Image
@@ -36,12 +36,12 @@ const ProfileCard = async () => {
       )}
 
       <div className="profile-card_text">
-        <p className="profile-card__name">
+        <a className="profile-card__name" href={`/${profile.username}`}>
           {profile.displayName ?? profile.username}
-        </p>
-        <p className="profile-card__id">{profile.id}</p>
+        </a>
+        <p className="profile-card__id">UID {profile.id}</p>
       </div>
-    </a>
+    </div>
   );
 };
 

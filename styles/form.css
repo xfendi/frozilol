@@ -424,6 +424,8 @@ input[type="radio"]:checked::before {
 }
 
 .form-modal {
+  z-index: 1000;
+  
   position: fixed;
   bottom: 50%;
   left: 50%;
@@ -441,6 +443,8 @@ input[type="radio"]:checked::before {
 }
 
 .modal-bg {
+  z-index: 999;
+
   position: fixed;
   top: 0;
   left: 0;

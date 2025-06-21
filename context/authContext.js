@@ -8,12 +8,14 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 
 import { auth, db } from "@/firebase";
 import { getNextUserId } from "@/lib/auth/getNextUserId";
+import { defaultPhotoURL } from "@/data/default";
 
 const AuthContext = createContext();
 
@@ -29,16 +31,20 @@ export const AuthContextProvider = ({ children }) => {
 
     const nextId = await getNextUserId();
 
+    const photoURL = defaultPhotoURL;
+
     let userDoc = {
       uid: userCredential.user.uid,
       createdAt: new Date(),
       email: email,
       id: nextId,
+      photoURL,
       promoCode,
       username,
     };
 
     setDoc(doc(db, "profiles", nextId.toString()), userDoc);
+    updateProfile(auth.currentUser, { photoURL });
 
     const idToken = await userCredential.user.getIdToken();
 

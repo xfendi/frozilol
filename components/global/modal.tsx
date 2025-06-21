@@ -36,7 +36,7 @@ const Modal: React.FC<ModalProps> = ({
             <IoIosClose size={24} />
           </button>
         </div>
-        <form onSubmit={onSubmit} className="form">
+        <form onSubmit={onSubmit} className={`form ${!onSubmit && "!gap-0"}`}>
           {content}
 
           <div className="flex flex-row gap-[10px]">

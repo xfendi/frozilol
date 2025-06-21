@@ -13,6 +13,7 @@ import PremiumPlate from "@/components/global/premiumPlate";
 import Cube from "../global/cube";
 import ProfileCard from "./ProfileCard";
 import SidebarBanner from "./SidebarBanner";
+import SharePageButton from "./SharePageButton";
 
 const Sidebar = async ({
   tab,
@@ -86,6 +87,7 @@ const Sidebar = async ({
               }
             />
           )}
+          <SharePageButton />
           <ProfileCard />
         </div>
       </nav>

@@ -126,7 +126,8 @@ body {
 .btn-dark,
 .btn-light,
 .btn-primary,
-.btn-brand {
+.btn-brand,
+.btn-big {
   padding: 8px 16px;
   outline: none;
   border: none;
@@ -137,6 +138,21 @@ body {
   transition: all var(--transition-default);
   display: flex;
   justify-content: center;
+}
+
+.btn-big {
+  padding: 16px;
+  justify-content: start;
+  border: 2px solid var(--border-secondary);
+  border-radius: 12px;
+  align-items: center;
+  font-weight: 400;
+  gap: 16px;
+}
+
+.btn-big:hover {
+  border: 2px solid var(--border-primary);
+  background-color: var(--color-opacity);
 }
 
 .btn-outline {

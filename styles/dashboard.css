@@ -113,17 +113,11 @@ main {
   background-color: var(--color-opacity);
 }
 
-.dashboard__section-header,
-.dashboard__section-main {
+.dashboard__section-main,
+.profile-card_container {
   background-color: var(--utility-gray-100);
   border-radius: 12px;
   padding: 16px;
-}
-
-.dashboard__section-header {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
 .sidebar__bottom {
@@ -145,11 +139,13 @@ main {
   gap: 4px;
 }
 
-.profile-card_container:hover {
-  background-color: var(--color-opacity);
-}
-
 .profile-card__id {
   color: var(--text-tertiary) !important;
   font-size: 12px;
+}
+
+.profile-card__name {
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 500;
 }
