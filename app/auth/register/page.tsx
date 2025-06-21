@@ -12,6 +12,7 @@ import { db } from "@/firebase";
 import { pages } from "@/data/names";
 import { validatePromoCode } from "@/lib/other/validatePromoCode";
 import Cube from "@/components/global/cube";
+import { maxInputLength } from "@/data/inputs";
 
 interface FirebaseError extends Error {
   code: string;
@@ -146,7 +147,7 @@ const RegisterPage = () => {
               placeholder="username"
               onChange={onUsernameChange}
               value={username}
-              maxLength={20}
+              maxLength={maxInputLength.username}
               required
             />
           </div>
@@ -167,6 +168,7 @@ const RegisterPage = () => {
               id="pasword"
               placeholder="Password"
               required
+              maxLength={maxInputLength.password}
             />
           </div>
 
@@ -178,7 +180,7 @@ const RegisterPage = () => {
               placeholder="Promo Code (optional)"
               value={promo}
               onChange={(e) => setPromo(e.target.value)}
-              maxLength={20}
+              maxLength={maxInputLength.promo}
             />
           </div>
 

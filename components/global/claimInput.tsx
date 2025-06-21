@@ -1,5 +1,6 @@
 "use client";
 
+import { maxInputLength } from "@/data/inputs";
 import Link from "next/link";
 import React from "react";
 
@@ -23,7 +24,7 @@ const ClaimInput = () => {
           value={username}
           onChange={handleInputChange}
           className="focus:outline-none"
-          maxLength={20}
+          maxLength={maxInputLength.username}
         />
       </div>
       <Link

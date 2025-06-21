@@ -1,7 +1,10 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import { maxInputLength } from "@/data/inputs";
 
-const generateUniqueCode = async (length = 10): Promise<string> => {
+const generateUniqueCode = async (
+  length = maxInputLength.giftCode
+): Promise<string> => {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
   while (true) {

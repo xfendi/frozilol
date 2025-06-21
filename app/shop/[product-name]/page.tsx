@@ -14,7 +14,7 @@ import Hero from "@/components/landing/Hero";
 import Footer from "@/components/landing/Footer";
 import toast from "react-hot-toast";
 import { validatePromoCode } from "@/lib/other/validatePromoCode";
-import { checkUserHasProduct } from "@/lib/other/checkUserHasProduct";
+import { maxInputLength } from "@/data/inputs";
 
 const ProductPage = ({
   params,
@@ -209,7 +209,7 @@ const ProductPage = ({
                       placeholder="Promo Code (optional)"
                       value={promoCode}
                       onChange={handlePromoInputChange}
-                      maxLength={20}
+                      maxLength={maxInputLength.promo}
                       className="focus:outline-none"
                     />
                   </div>
@@ -237,7 +237,7 @@ const ProductPage = ({
                       placeholder="Promo Code (optional)"
                       value={promoCode}
                       onChange={handlePromoInputChange}
-                      maxLength={20}
+                      maxLength={maxInputLength.promo}
                       className="focus:outline-none"
                     />
                   </div>

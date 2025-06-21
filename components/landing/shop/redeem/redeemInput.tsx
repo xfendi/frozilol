@@ -1,6 +1,7 @@
 "use client";
 
 import { AuthData } from "@/context/authContext";
+import { maxInputLength } from "@/data/inputs";
 import { db } from "@/firebase";
 import { addProductToUser } from "@/lib/other/addProductToUser";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -87,7 +88,7 @@ const RedeemInput = () => {
               value={code}
               onChange={handleChangeCode}
               className="focus:outline-none"
-              maxLength={20}
+              maxLength={maxInputLength.giftCode}
             />
           </div>
           <button

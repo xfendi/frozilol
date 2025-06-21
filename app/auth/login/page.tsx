@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { AuthData } from "@/context/authContext";
 import Loader from "@/components/global/loader";
 import Cube from "@/components/global/cube";
+import { maxInputLength } from "@/data/inputs";
 
 interface FirebaseError extends Error {
   code: string;
@@ -17,7 +18,6 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>();
 
   const { login } = AuthData();
-  const router = useRouter();
 
   const HandleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -94,6 +94,7 @@ const LoginPage = () => {
               id="pasword"
               placeholder="Password"
               required
+              maxLength={maxInputLength.password}
             />
           </div>
 
