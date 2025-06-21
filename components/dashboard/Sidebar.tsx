@@ -11,8 +11,16 @@ import { tabs, proTabs } from "@/data/dashboard";
 
 import PremiumPlate from "@/components/global/premiumPlate";
 import Cube from "../global/cube";
+import ProfileCard from "./ProfileCard";
+import SidebarBanner from "./SidebarBanner";
 
-const Sidebar = async ({ tab }: { tab?: string }) => {
+const Sidebar = async ({
+  tab,
+  premium,
+}: {
+  tab?: string;
+  premium?: boolean;
+}) => {
   type TabType = (typeof tabs)[number];
 
   const currentTab: TabType = tabs.includes(tab as TabType)
@@ -63,7 +71,23 @@ const Sidebar = async ({ tab }: { tab?: string }) => {
             ))}
           </ul>
         </div>
-        <div className="sidebar__bottom"></div>
+        <div className="sidebar__bottom">
+          {!premium && (
+            <SidebarBanner
+              title="Get Premium"
+              subtitle="Upgrade your account and enjoy new features"
+              content={
+                <Link
+                  href="/shop/premium"
+                  className="btn-outline !bg-[rgba(255,102,178,0.75)] hover:!bg-[rgba(255,102,178,0.85)] !rounded-[8px]"
+                >
+                  Buy Now
+                </Link>
+              }
+            />
+          )}
+          <ProfileCard />
+        </div>
       </nav>
     </aside>
   );

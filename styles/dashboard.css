@@ -69,6 +69,11 @@ main {
   gap: 16px;
 }
 
+.sidebar__bottom {
+  padding: 16px;
+  margin-top: auto;
+}
+
 .sidebar__nav {
   padding: 0 16px;
   width: 100%;
@@ -84,7 +89,9 @@ main {
   gap: 8px;
 }
 
-.sidebar__nav-link {
+.sidebar__nav-link,
+.sidebar_banner,
+.profile-card_container {
   color: var(--text-tertiary);
   display: flex;
   align-items: center;
@@ -117,4 +124,32 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.sidebar__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar_banner {
+  background-color: var(--utility-gray-100);
+  flex-direction: column;
+  align-items: start !important;
+  padding: 16px !important;
+}
+
+.profile-card_text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-card_container:hover {
+  background-color: var(--color-opacity);
+}
+
+.profile-card__id {
+  color: var(--text-tertiary) !important;
+  font-size: 12px;
 }

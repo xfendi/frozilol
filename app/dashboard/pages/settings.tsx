@@ -39,7 +39,7 @@ const SettingsPage = () => {
 
   return (
     <section className="flex flex-col gap-4">
-      <div className="dashboard__section-main w-1/3">
+      <div className="dashboard__section-main xl:w-1/3">
         <div className="input_container">
           <div className="input_title">Display Name</div>
           <div className="input_body">

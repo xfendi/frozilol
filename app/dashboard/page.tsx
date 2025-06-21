@@ -2,7 +2,6 @@ import React from "react";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 
-import { db } from "@/firebase-admin";
 import { getServerUser } from "@/lib/data/getServerUser";
 import { proTabs, tabs } from "@/data/dashboard";
 
@@ -59,7 +58,7 @@ const Dashboard = async ({ searchParams }: Props) => {
   return (
     <div className="app admin flex flex-row">
       <Header tab={tab} />
-      <Sidebar tab={tab} />
+      <Sidebar tab={tab} premium={isPro} />
       <main className="scrollable-div">{pageToRender}</main>
     </div>
   );
