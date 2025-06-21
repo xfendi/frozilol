@@ -15,6 +15,7 @@ import SettingsPage from "./pages/settings";
 
 import "@/styles/dashboard.css";
 import Header from "@/components/dashboard/Header";
+import { getServerProfile } from "@/lib/data/getServerProfile";
 
 export const metadata: Metadata = {
   title: "frozi.lol | Dashboard",
@@ -32,11 +33,9 @@ const Dashboard = async ({ searchParams }: Props) => {
     redirect("/auth/login");
   }
 
-  const docRef = db.collection("profiles").doc(user?.displayName!);
-  const docSnap = await docRef.get();
-  const userData = docSnap.data();
+  const profileData = await getServerProfile(user.uid);
 
-  const isPro = userData?.premium || false;
+  const isPro = profileData?.premium || false;
 
   type TabType = (typeof tabs)[number];
 

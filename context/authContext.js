@@ -6,15 +6,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  updateProfile,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import Cookies from "js-cookie";
 import { doc, setDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 
 import { auth, db } from "@/firebase";
+import { getNextUserId } from "@/lib/auth/getNextUserId";
 
 const AuthContext = createContext();
 
@@ -28,18 +27,18 @@ export const AuthContextProvider = ({ children }) => {
       password
     );
 
+    const nextId = await getNextUserId();
+
     let userDoc = {
       uid: userCredential.user.uid,
       createdAt: new Date(),
       email: email,
+      id: nextId,
       promoCode,
       username,
     };
 
-    setDoc(doc(db, "profiles", username), userDoc);
-    updateProfile(userCredential.user, {
-      displayName: username,
-    });
+    setDoc(doc(db, "profiles", nextId.toString()), userDoc);
 
     const idToken = await userCredential.user.getIdToken();
 

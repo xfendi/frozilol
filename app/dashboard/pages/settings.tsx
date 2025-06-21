@@ -24,7 +24,7 @@ const SettingsPage = () => {
           return;
         }
 
-        await updateDoc(doc(db, "profiles", profile.username), {
+        await updateDoc(doc(db, "profiles", profile.id.toString()), {
           displayName: value,
         });
 

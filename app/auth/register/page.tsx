@@ -7,12 +7,10 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AuthData } from "@/context/authContext";
 import Loader from "@/components/global/loader";
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "@/firebase";
-import { pages } from "@/data/names";
 import { validatePromoCode } from "@/lib/other/validatePromoCode";
 import Cube from "@/components/global/cube";
 import { maxInputLength } from "@/data/inputs";
+import { isUsernameTaken } from "@/lib/auth/isUsernameTaken";
 
 interface FirebaseError extends Error {
   code: string;
@@ -57,10 +55,9 @@ const RegisterPage = () => {
     const password = formData.get("password") as string;
 
     try {
-      const userRef = doc(db, "profiles", formatedUsername);
-      const userSnap = await getDoc(userRef);
+      const isTaken = await isUsernameTaken(formatedUsername);
 
-      if (!formatedUsername || userSnap.exists() || pages.includes(formatedUsername)) {
+      if (isTaken) {
         setIsLoading(false);
         toast.error("Username is already taken.");
         setUsernameTaken(true);
@@ -74,7 +71,9 @@ const RegisterPage = () => {
 
     if (promo) {
       if (promo.length < 3) {
-        return toast.error("Promo code must be at least 3 characters long.");
+        setIsLoading(false);
+        toast.error("Promo code must be at least 3 characters long.");
+        return;
       }
 
       const { valid, data, error } = await validatePromoCode(
@@ -82,11 +81,13 @@ const RegisterPage = () => {
       );
 
       if (error) {
+        setIsLoading(false);
         toast.error("Error checking promo code");
         return;
       }
 
       if (!valid) {
+        setIsLoading(false);
         toast.error("Invalid promo code");
         return;
       }
