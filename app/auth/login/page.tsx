@@ -105,7 +105,7 @@ const LoginPage = () => {
           </div>
 
           <button type="submit" className="btn-primary">
-            {isLoading ? <Loader white /> : "Register"}
+            {isLoading ? <Loader white /> : "Log in"}
           </button>
 
           <div className="form__footer">
