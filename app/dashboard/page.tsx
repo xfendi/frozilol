@@ -59,7 +59,7 @@ const Dashboard = async ({ searchParams }: Props) => {
 
   return (
     <div className="app admin flex flex-row">
-      <Header />
+      <Header tab={tab} />
       <Sidebar tab={tab} />
       <main className="scrollable-div">{pageToRender}</main>
     </div>

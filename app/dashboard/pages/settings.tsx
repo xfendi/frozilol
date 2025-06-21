@@ -7,6 +7,7 @@ import { ProfileData } from "@/context/profileContext";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import toast from "react-hot-toast";
+import { maxInputLength } from "@/data/inputs";
 
 const SettingsPage = () => {
   const [opanModal, setOpenModal] = useState<string>("");
@@ -38,15 +39,7 @@ const SettingsPage = () => {
 
   return (
     <section className="flex flex-col gap-4">
-      <div className="dashboard__section-header">
-        <div className="feature-title max-w-sm text-2xl font-bold">
-          ⚙️ Account Settings
-        </div>
-        <div className="text-xl !font-light !text-stone-500">
-          Manage your account settings and preferences here.
-        </div>
-      </div>
-      <div className="dashboard__section-main">
+      <div className="dashboard__section-main w-1/3">
         <div className="input_container">
           <div className="input_title">Display Name</div>
           <div className="input_body">
@@ -75,6 +68,7 @@ const SettingsPage = () => {
                 id="newDisplayName"
                 placeholder="New Display Name"
                 className="focus:outline-none"
+                maxLength={maxInputLength.displayName}
               />
             </div>
           </div>
