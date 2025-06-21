@@ -1,14 +1,24 @@
 import React from "react";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
 import { db } from "@/firebase-admin";
 import { getServerUser } from "@/lib/data/getServerUser";
 import { proTabs, tabs } from "@/data/dashboard";
-import OverviewPage from "./pages/overview";
+
 import NotFoundPage from "@/components/dashboard/other/notFound";
 import NoProPage from "@/components/dashboard/other/noPro";
+import Sidebar from "@/components/dashboard/Sidebar";
+
+import OverviewPage from "./pages/overview";
+import SettingsPage from "./pages/settings";
 
 import "@/styles/dashboard.css";
-import Sidebar from "@/components/dashboard/Sidebar";
+import Header from "@/components/dashboard/Header";
+
+export const metadata: Metadata = {
+  title: "frozi.lol | Dashboard",
+};
 
 type Props = {
   searchParams: Promise<{ tab?: string }>;
@@ -36,6 +46,7 @@ const Dashboard = async ({ searchParams }: Props) => {
 
   const pages: Record<TabType, React.ReactNode> = {
     overview: <OverviewPage />,
+    settings: <SettingsPage />,
   };
 
   let pageToRender = pages[currentTab];
@@ -47,7 +58,8 @@ const Dashboard = async ({ searchParams }: Props) => {
   }
 
   return (
-    <div className="app flex flex-row">
+    <div className="app admin flex flex-row">
+      <Header />
       <Sidebar tab={tab} />
       <main className="scrollable-div">{pageToRender}</main>
     </div>

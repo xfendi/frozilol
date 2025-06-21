@@ -1,8 +1,18 @@
+.app.admin {
+  height: 100vh;
+  width: 100vw;
+  transition: all var(--transition-default);
+
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 80px 1fr;
+}
+
 .main-container {
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   height: 100%;
 }
 
@@ -17,8 +27,8 @@ header {
   color: var(--text-primary);
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  gap: 10px;
+  padding: 16px;
+  gap: 16px;
   display: flex;
 
   grid-column: 2 / 3;
@@ -26,19 +36,25 @@ header {
 }
 
 aside {
-  background-color: var(--utility-gray-100) !important;
   display: flex;
   flex-direction: column;
 
-  width: 280px;
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+
+  border-right: 1px solid var(--border-secondary);
 }
 
 main {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 24px;
+
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+
+  gap: 16px;
+  padding: 16px;
   flex: 1;
 }
 
@@ -47,27 +63,25 @@ main {
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 16px;
+  padding: 16px 32px;
   height: 60px;
-  border-bottom: var(--border-secondary) 1px solid;
 
   gap: 16px;
 }
 
 .sidebar__nav {
-  padding: 16px;
+  padding: 0 16px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 1fr;
-  gap: 4px;
 }
 
 .sidebar__nav ul {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .sidebar__nav-link {
@@ -85,7 +99,7 @@ main {
 
 .sidebar__nav-link.side:hover {
   color: var(--text-primary);
-  background-color:  var(--color-opacity);
+  background-color: var(--color-opacity);
 }
 .sidebar__nav-link.active,
 .sidebar__nav-link.side.active {
@@ -100,4 +114,17 @@ main {
 .sidebar__nav-link:hover {
   background-color: var(--color-opacity);
   color: var(--text-primary);
+}
+
+.dashboard__section-header,
+.dashboard__section-main {
+  background-color: var(--utility-gray-100);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.dashboard__section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
