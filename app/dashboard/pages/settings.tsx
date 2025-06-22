@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { maxInputLength } from "@/data/inputs";
 import ChangeEmailButton from "@/components/dashboard/ChangeEmailButton";
 import LogoutButton from "@/components/auth/LogoutButton";
+import ChangePasswordButton from "@/components/dashboard/ChangePasswordButton";
 
 const SettingsPage = () => {
   const [opanModal, setOpenModal] = useState<string>("");
@@ -89,6 +90,7 @@ const SettingsPage = () => {
 
       <div className="dashboard__section-main flex flex-col gap-4 xl:w-1/3">
         <ChangeEmailButton />
+        <ChangePasswordButton />
         <LogoutButton />
       </div>
 
