@@ -16,11 +16,14 @@ import toast from "react-hot-toast";
 import { auth, db } from "@/firebase";
 import { getNextUserId } from "@/lib/auth/getNextUserId";
 import { defaultPhotoURL } from "@/data/default";
+import { useRouter } from "next/navigation";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+
+  const router = useRouter();
 
   const createUser = async (email, password, username, promoCode) => {
     const userCredential = await createUserWithEmailAndPassword(
@@ -87,6 +90,8 @@ export const AuthContextProvider = ({ children }) => {
   const logout = async () => {
     try {
       await signOut(auth);
+      await fetch("/api/auth/logout", { method: "POST" });
+      router.push("/auth/login");
     } catch (e) {
       throw new Error(e);
     }

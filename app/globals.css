@@ -123,11 +123,11 @@ body {
   height: 100vh;
 }
 
-.btn-dark,
-.btn-light,
 .btn-primary,
-.btn-brand,
-.btn-big {
+.btn-light,
+.btn-opacity,
+.btn-big,
+.btn-outline {
   padding: 8px 16px;
   outline: none;
   border: none;
@@ -140,6 +140,16 @@ body {
   justify-content: center;
 }
 
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-light {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
 .btn-big {
   padding: 16px;
   justify-content: start;
@@ -150,72 +160,25 @@ body {
   gap: 16px;
 }
 
-.btn-big:hover {
-  border: 2px solid var(--border-primary);
-  background-color: var(--color-opacity);
-}
-
 .btn-outline {
-  padding: 7px 15px;
-  border: 1px var(--color-light-gray) solid;
-  background: none;
-  outline: none;
-  border-radius: 13px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--transition-default);
-}
-
-.btn-dark {
-  background-color: var(--color-black);
-  color: var(--color-white);
-}
-
-.btn-light {
-  background-color: var(--color-white);
-  color: var(--color-black);
-}
-
-.btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-}
-
-.btn-clear {
-  margin: 9px 12px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all var(--transition-default);
-}
-
-.btn-brand {
-  border: none;
-  background-color: var(--color-black);
-  color: var(--color-white);
-}
-
-.btn-dark:hover {
-  transform: scale(1.03);
-}
-
-.btn-light:hover {
-  background-color: var(--utility-gray-700);
+  border: 2px solid var(--border-secondary);
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-dark);
 }
 
-.btn-brand:hover {
-  background-color: var(--color-primary);
+.btn-light:hover {
+  background-color: var(--utility-gray-700);
 }
 
-.btn-clear:hover {
-  text-decoration: underline;
+.btn-opacity:hover {
+  background-color: var(--color-opacity);
 }
 
+.btn-big:hover,
 .btn-outline:hover {
+  border: 2px solid var(--border-primary);
   background-color: var(--color-opacity);
 }
 
@@ -345,6 +308,11 @@ body {
 }
 
 .divider {
-  border-top: 2px solid var(--border-secondary);
+  border-top: 1px solid var(--border-secondary);
   width: 100%;
+}
+
+.divider-vertical {
+  border-left: 1px solid var(--border-secondary);
+  height: 100%;
 }

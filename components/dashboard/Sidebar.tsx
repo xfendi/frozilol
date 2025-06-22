@@ -80,7 +80,7 @@ const Sidebar = async ({
               content={
                 <Link
                   href="/shop/premium"
-                  className="btn-outline !bg-[rgba(255,102,178,0.75)] hover:!bg-[rgba(255,102,178,0.85)] !rounded-[8px]"
+                  className="btn-opacity !bg-[rgba(255,102,178,0.75)] hover:!bg-[rgba(255,102,178,0.85)] !rounded-[8px]"
                 >
                   Buy Now
                 </Link>

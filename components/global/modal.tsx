@@ -30,7 +30,7 @@ const Modal: React.FC<ModalProps> = ({
           </div>
           <button
             type="button"
-            className="btn-outline !p-0.5 !rounded-[8px]"
+            className="btn-opacity !p-0.5 !rounded-[8px]"
             onClick={onClose}
           >
             <IoIosClose size={24} />

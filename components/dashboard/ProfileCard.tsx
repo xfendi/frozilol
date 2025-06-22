@@ -23,8 +23,8 @@ const ProfileCard = async () => {
           src={user?.photoURL}
           alt={profile.username}
           className="rounded-lg"
-          width={40}
-          height={40}
+          width={42}
+          height={42}
         />
       ) : (
         <Image
