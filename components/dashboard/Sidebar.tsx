@@ -36,7 +36,6 @@ const Sidebar = async ({
     customize: <LuPaintbrush size={ICONS_SIZE} />,
     badges: <MdOutlineBadge size={ICONS_SIZE} />,
     links: <MdLink size={ICONS_SIZE} />,
-    premium: <MdOutlineDiamond size={ICONS_SIZE} />,
     templates: <TbTemplate size={ICONS_SIZE} />,
     settings: <IoSettingsOutline size={ICONS_SIZE} />,
   };

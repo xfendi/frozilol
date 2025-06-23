@@ -4,12 +4,11 @@ export const tabs = [
   "customize",
   "badges",
   "links",
-  "premium",
   "templates",
   "settings",
 ];
 
-export const proTabs = ["premium"];
+export const proTabs = ["analytics", "badges"];
 
 export const headerContent = [
   {

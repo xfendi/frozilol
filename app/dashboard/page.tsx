@@ -2,20 +2,19 @@ import React from "react";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 
+import { getServerProfile } from "@/lib/data/getServerProfile";
 import { getServerUser } from "@/lib/data/getServerUser";
 import { proTabs, tabs } from "@/data/dashboard";
+import Header from "@/components/dashboard/Header";
+import Sidebar from "@/components/dashboard/Sidebar";
+
+import "@/styles/dashboard.css";
 
 import NotFoundPage from "@/components/dashboard/other/notFound";
 import NoProPage from "@/components/dashboard/other/noPro";
-import Sidebar from "@/components/dashboard/Sidebar";
 
-import OverviewPage from "./pages/overview";
-import SettingsPage from "./pages/settings";
-
-import "@/styles/dashboard.css";
-import Header from "@/components/dashboard/Header";
-import { getServerProfile } from "@/lib/data/getServerProfile";
 import LinksPage from "./pages/links";
+import SettingsPage from "./pages/settings";
 
 export const metadata: Metadata = {
   title: "frozi.lol | Dashboard",
@@ -44,7 +43,6 @@ const Dashboard = async ({ searchParams }: Props) => {
     : "overview";
 
   const pages: Record<TabType, React.ReactNode> = {
-    overview: <OverviewPage />,
     links: <LinksPage />,
     settings: <SettingsPage />,
   };
