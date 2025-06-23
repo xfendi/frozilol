@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import { GripVertical, Trash } from "lucide-react";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 export const SortableLinkItem = ({ link }: { link: LinkType }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -38,6 +39,7 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
 
       if (querySnapshot.empty) {
         console.error("User profile not found!");
+        toast.error("User profile not found!");
         return;
       }
 
@@ -51,7 +53,7 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
 
       await updateDoc(userDocRef, { links: updatedLinks });
 
-      console.log("Link deleted and saved to Firestore 💾");
+      toast.success("Link deleted successfully!");
     } catch (error) {
       console.error("Error deleting link:", error);
     }
