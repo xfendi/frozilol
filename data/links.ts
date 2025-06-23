@@ -1,4 +1,5 @@
 export type LinkType = {
+  id?: number;
   name: string;
   friendlyName: string;
   type: string;

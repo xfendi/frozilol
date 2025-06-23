@@ -160,3 +160,11 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+.link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  background-color: var(--utility-gray-100);
+}

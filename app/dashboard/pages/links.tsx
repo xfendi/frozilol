@@ -1,10 +1,21 @@
 "use client";
 
+import { DndLinks } from "@/components/dashboard/DndLinks";
 import Modal from "@/components/global/modal";
 import NamePlateContainer from "@/components/global/namePlateContainer";
+import { AuthData } from "@/context/authContext";
 import { crypto, LinkType, socials } from "@/data/links";
+import { db } from "@/firebase";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const LinksPage = () => {
@@ -13,6 +24,10 @@ const LinksPage = () => {
   const [loading, setLoading] = useState(false);
 
   const [providedLink, setProvidedLink] = useState("");
+
+  const [links, setLinks] = useState<LinkType[]>([]);
+
+  const { user } = AuthData();
 
   const openLinkModal = (data: LinkType) => {
     setOpenModal(data);
@@ -32,6 +47,15 @@ const LinksPage = () => {
 
     if (!openModal) {
       return toast.error("No link selected.");
+    }
+
+    const foundLink = links.find(
+      (l) => l.link === `https://${openModal?.profileStartLink}${providedLink}`
+    );
+
+    if (foundLink) {
+      toast.error("You have already added this link.");
+      return;
     }
 
     setLoading(true);
@@ -56,6 +80,51 @@ const LinksPage = () => {
       toast.success(`${openModal.friendlyName} link added successfully`);
       setLoading(false);
       closeModal();
+    }
+  };
+
+  useEffect(() => {
+    if (!user?.uid) return;
+
+    const q = query(collection(db, "profiles"), where("uid", "==", user.uid));
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let updatedLinks: LinkType[] = [];
+      querySnapshot.forEach((doc) => {
+        updatedLinks = doc.data().links;
+      });
+
+      const linksWithIds = updatedLinks.map((link, index) => ({
+        ...link,
+        id: index,
+      }));
+
+      console.log(linksWithIds);
+      setLinks(linksWithIds);
+    });
+
+    return () => unsubscribe();
+  }, [user?.uid]);
+
+  const handleReorder = async (newLinks: LinkType[]) => {
+    try {
+      setLinks(newLinks);
+
+      const q = query(collection(db, "profiles"), where("uid", "==", user.uid));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        console.error("User profile not found!");
+        return;
+      }
+
+      const userDocRef = querySnapshot.docs[0].ref;
+
+      await updateDoc(userDocRef, { links: newLinks });
+
+      console.log("Reorder saved to Firestore 💾");
+    } catch (error) {
+      console.error("Error updating order:", error);
     }
   };
 
@@ -101,6 +170,7 @@ const LinksPage = () => {
             ))}
           </div>
         </div>
+        <DndLinks links={links} onReorder={handleReorder} />
       </section>
 
       <Modal
