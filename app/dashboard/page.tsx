@@ -15,6 +15,7 @@ import SettingsPage from "./pages/settings";
 import "@/styles/dashboard.css";
 import Header from "@/components/dashboard/Header";
 import { getServerProfile } from "@/lib/data/getServerProfile";
+import LinksPage from "./pages/links";
 
 export const metadata: Metadata = {
   title: "frozi.lol | Dashboard",
@@ -44,6 +45,7 @@ const Dashboard = async ({ searchParams }: Props) => {
 
   const pages: Record<TabType, React.ReactNode> = {
     overview: <OverviewPage />,
+    links: <LinksPage />,
     settings: <SettingsPage />,
   };
 

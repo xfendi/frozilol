@@ -316,3 +316,36 @@ body {
   border-left: 1px solid var(--border-secondary);
   height: 100%;
 }
+
+.nameplate-container {
+  position: relative;
+  display: inline-block;
+}
+
+.nameplate-container .nameplate-container_text {
+  position: absolute;
+
+  width: max-content;
+  left: 34px;
+  transform: translateX(-50%);
+
+  text-align: center;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 14px;
+
+  pointer-events: none;
+  opacity: 0;
+  bottom: 105%;
+  scale: 0.9 !important;
+
+  background-color: var(--utility-gray-100);
+  border: 2px solid var(--border-secondary);
+
+  transition: var(--transition-default);
+}
+
+.nameplate-container:hover .nameplate-container_text {
+  opacity: 1;
+  scale: 1 !important;
+}
