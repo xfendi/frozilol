@@ -106,6 +106,14 @@ export const socials: LinkType[] = [
     profileStartLink: "medium.com/@",
   },
   {
+    name: "namemc",
+    friendlyName: "NameMC",
+    type: "socials",
+    linkMode: "href",
+    link: "https://namemc.com/",
+    profileStartLink: "namemc.com/profile/",
+  },
+  {
     name: "onlyfans",
     friendlyName: "OnlyFans",
     type: "socials",
@@ -224,6 +232,14 @@ export const socials: LinkType[] = [
     linkMode: "href",
     link: "https://tiktok.com/",
     profileStartLink: "tiktok.com/@",
+  },
+  {
+    name: "tipply",
+    friendlyName: "Tipply",
+    type: "socials",
+    linkMode: "href",
+    link: "https://tipply.pl/",
+    profileStartLink: "tipply.pl/@",
   },
   {
     name: "twitch",
