@@ -19,9 +19,9 @@ export async function POST(req: Request) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
-  } catch (err: any) {
-    console.error("⚠️ Stripe webhook error:", err.message);
-    return new NextResponse(`Webhook Error: ${err.message}`, { status: 400 });
+  } catch (err) {
+    console.error("⚠️ Stripe webhook error:", err);
+    return new NextResponse(`Webhook Error: ${err}`, { status: 400 });
   }
 
   console.log("✅ Stripe event:", event.type);

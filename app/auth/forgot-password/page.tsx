@@ -6,7 +6,6 @@ import { auth } from "@/firebase";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 import Loader from "@/components/global/loader";
-import Image from "next/image";
 import Cube from "@/components/global/cube";
 
 const ForgotPassword = () => {
@@ -20,9 +19,9 @@ const ForgotPassword = () => {
     try {
       await sendPasswordResetEmail(auth, email);
       toast.success("Password reset link sent to your email.");
-    } catch (error: any) {
+    } catch (error) {
       console.error(error);
-      toast.error(error.message || "Something went wrong.");
+      toast.error("Something went wrong.");
     }
 
     setLoading(false);

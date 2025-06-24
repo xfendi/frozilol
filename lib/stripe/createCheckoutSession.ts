@@ -20,7 +20,7 @@ export async function createCheckoutSession({
     parseFloat(product.price.replace(",", ".")) * 100
   );
 
-  let metadata = {
+  const metadata = {
     isGift: isGift ? "true" : "false",
     giftEmail: giftEmail ?? "",
     promoCode: promoCode ?? "",

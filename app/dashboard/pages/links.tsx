@@ -86,7 +86,7 @@ const LinksPage = () => {
       }
 
       toast.success(`${openModal.friendlyName} link added successfully`);
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
       toast.error("Something went wrong!");
     } finally {

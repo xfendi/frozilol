@@ -7,7 +7,7 @@ const Text = () => {
         ⁉️ Support
       </div>
       <div className="section-description !text-stone-500 text-md sm:text-xl">
-        Welcome to our support page! We're here to ensure you have the best{" "}
+        Welcome to our support page! We&quot;re here to ensure you have the best{" "}
         <br />
         experience with our service. If you have any questions, concerns or just{" "}
         <br />

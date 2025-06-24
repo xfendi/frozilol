@@ -18,7 +18,7 @@ const SettingsPage = () => {
 
   const { profile } = ProfileData();
 
-  const handleSubmit = async (e: any, value: string, type: string) => {
+  const handleSubmit = async (e: React.FormEvent, value: string, type: string) => {
     e.preventDefault();
     setLoading(true);
 

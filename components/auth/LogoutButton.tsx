@@ -1,5 +1,4 @@
 import { AuthData } from "@/context/authContext";
-import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 

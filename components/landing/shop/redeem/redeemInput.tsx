@@ -3,7 +3,6 @@
 import { AuthData } from "@/context/authContext";
 import { maxInputLength } from "@/data/inputs";
 import { db } from "@/firebase";
-import { addProductToUser } from "@/lib/other/addProductToUser";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -52,7 +51,7 @@ const RedeemInput = () => {
         return toast.error("You already own this product.");
       }
 
-      const addRes = await fetch("/api/product/add", {
+      await fetch("/api/product/add", {
         method: "POST",
         body: JSON.stringify({
           userId: user.uid,

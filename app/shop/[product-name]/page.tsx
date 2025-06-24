@@ -33,7 +33,7 @@ const ProductPage = ({
     if (searchPromo && searchPromo.length >= 3) {
       setPromoCode(searchPromo);
     }
-  }, [searchParams]);
+  }, [searchPromo]);
 
   const { user } = AuthData();
   const resolvedParams = use(params);
@@ -76,7 +76,7 @@ const ProductPage = ({
         return toast.error("Promo code must be at least 3 characters long.");
       }
 
-      const { valid, data, error } = await validatePromoCode(
+      const { valid, error } = await validatePromoCode(
         promoCode.toLowerCase()
       );
 

@@ -4,7 +4,6 @@ import React, { useState, FormEvent } from "react";
 import toast from "react-hot-toast";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { AuthData } from "@/context/authContext";
 import Loader from "@/components/global/loader";
 import Cube from "@/components/global/cube";

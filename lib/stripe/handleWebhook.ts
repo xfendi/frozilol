@@ -4,6 +4,7 @@ import Product from "@/types/Product";
 import { sendEmail } from "@/lib/email/emailService";
 import { db } from "@/firebase-admin";
 import { addProductToUser } from "../other/addProductToUser";
+import Stripe from "stripe";
 
 const sendThanksEmail = async (email: string, giftEmail?: string) => {
   const mailOptions = {
@@ -35,9 +36,14 @@ const sendCodeEmail = async (email: string, code: string, product: Product) => {
   }
 };
 
-export async function handleStripeWebhook(event: any) {
+export async function handleStripeWebhook(event: Stripe.Event) {
   if (event.type === "checkout.session.completed") {
-    const session = event.data.object;
+    const session = event.data.object as Stripe.Checkout.Session;
+
+    if (!session || !session.metadata || !session.customer_details) {
+      console.error("Invalid checkout session.");
+      return;
+    }
 
     const giftEmail = session.metadata.giftEmail;
     const purchaseEmail = session.customer_details.email;
@@ -55,7 +61,7 @@ export async function handleStripeWebhook(event: any) {
       return;
     }
 
-    sendThanksEmail(purchaseEmail, giftEmail);
+    sendThanksEmail(purchaseEmail!, giftEmail);
 
     if (promoCode) {
       try {
@@ -96,7 +102,7 @@ export async function handleStripeWebhook(event: any) {
           stripeSessionId: session.id,
           userId: userId || null,
           productId,
-          amountTotal: session.amount_total / 100,
+          amountTotal: session.amount_total! / 100,
           isGift,
           promoCode: promoCode || null,
           purchaseEmail,
@@ -110,7 +116,7 @@ export async function handleStripeWebhook(event: any) {
     }
 
     if (isGift) {
-      const code = await generateGiftCode(productId);
+      const code = await generateGiftCode(Number(productId));
       sendCodeEmail(giftEmail, code.toString(), product);
     } else {
       await addProductToUser(Number(productId), userId);

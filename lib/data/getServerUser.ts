@@ -12,6 +12,7 @@ export const getServerUser = async () => {
     const userRecord = await auth.getUser(decoded.uid);
     return userRecord;
   } catch (err) {
+    console.error("Error getting user:", err);
     return null;
   }
 };

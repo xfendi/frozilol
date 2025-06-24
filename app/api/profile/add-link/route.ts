@@ -41,7 +41,7 @@ export async function POST(req: Request) {
 
     const profileData = await profileDocRef.get().then((doc) => doc.data());
 
-    let databaseLink = {
+    const databaseLink = {
       name,
       type,
       linkMode: linkData?.linkMode,
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ success: true }, { status: 201 });
-  } catch (err: any) {
+  } catch (err) {
     console.error("Add link error:", err);
     return NextResponse.json(
       { error: "Internal server error" },

@@ -6,7 +6,6 @@ import { FaKey } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
 
 import {
-  getAuth,
   EmailAuthProvider,
   reauthenticateWithCredential,
 } from "firebase/auth";
@@ -48,7 +47,7 @@ const ChangeEmailButton = () => {
     try {
       await reauthenticateWithCredential(user, credential);
       setStep(2);
-    } catch (err: any) {
+    } catch (err) {
       toast.error("Invalid password.");
       console.error(err);
     } finally {
@@ -74,7 +73,7 @@ const ChangeEmailButton = () => {
       toast.success("Email updated successfully!");
       closeModal();
       logout();
-    } catch (err: any) {
+    } catch (err) {
       toast.error("Failed to update email.");
       console.error(err);
     } finally {

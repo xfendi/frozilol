@@ -17,8 +17,8 @@ const VerifyEmailButton = () => {
 
       await sendEmailVerification(user);
       toast.success("Email verified successfully");
-    } catch (err: any) {
-      toast.error(err.message || "Something went wrong");
+    } catch (err) {
+      toast.error("Failed to send email verification");
       console.error(err);
     }
   };

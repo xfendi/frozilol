@@ -43,13 +43,17 @@ const ChangePasswordButton = () => {
     try {
       await reauthenticateWithCredential(user, credential);
       setStep(2);
-    } catch (err: any) {
+    } catch (err) {
       toast.error("Invalid password.");
       console.error(err);
     } finally {
       setLoading(false);
     }
   };
+
+  interface FirebaseError extends Error {
+    code: string;
+  }
 
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,30 +65,35 @@ const ChangePasswordButton = () => {
       toast.success("Password updated successfully!");
       closeModal();
       logout();
-    } catch (err: any) {
-      const errorCode = err.code;
+    } catch (err: unknown) {
+      if (err instanceof Error && "code" in err) {
+        const firebaseErr = err as FirebaseError;
+        const errorCode = firebaseErr?.code;
 
-      switch (errorCode) {
-        case "auth/requires-recent-login":
-          toast.error("Please log in again before changing your password.");
-          break;
-        case "auth/weak-password":
-          toast.error(
-            "Your new password is too weak. Use at least 6 characters."
-          );
-          break;
-        case "auth/invalid-password":
-          toast.error("The password format is invalid.");
-          break;
-        case "auth/too-many-requests":
-          toast.error("Too many attempts. Please try again later.");
-          break;
-        default:
-          toast.error("Failed to update password. Try again later.");
-          break;
+        switch (errorCode) {
+          case "auth/requires-recent-login":
+            toast.error("Please log in again before changing your password.");
+            break;
+          case "auth/weak-password":
+            toast.error(
+              "Your new password is too weak. Use at least 6 characters."
+            );
+            break;
+          case "auth/invalid-password":
+            toast.error("The password format is invalid.");
+            break;
+          case "auth/too-many-requests":
+            toast.error("Too many attempts. Please try again later.");
+            break;
+          default:
+            toast.error("Failed to update password. Try again later.");
+            break;
+        }
+
+        console.error("Password update error:", firebaseErr);
+      } else {
+        console.error("Unknown error:", err);
       }
-
-      console.error("Password update error:", err);
     } finally {
       setLoading(false);
     }

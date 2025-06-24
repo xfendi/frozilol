@@ -9,22 +9,22 @@ const Text = () => {
       <div className="section-description !text-stone-500 text-md sm:text-xl">
         Welcome to frozi.lol! By accessing or using our website and services,{" "}
         <br />
-        you agree to these Terms of Service ("Terms"). If you're not cool with{" "}
+        you agree to these Terms of Service (&quot;Terms&quot;). If you&quot;re not cool with{" "}
         <br />
-        them — no hard feelings, but you shouldn't use the platform.
+        them — no hard feelings, but you shouldn&quot;t use the platform.
       </div>
       <div className="section-main gap-[32px] flex flex-col">
         <div className="text-xl">Acceptance of Terms</div>
         <div className="section-description !text-stone-500 text-md sm:text-xl">
           By using frozi.lol, you agree to be bound by these Terms and our
-          Privacy Policy. If you don't agree with anything here, please don’t
+          Privacy Policy. If you don&quot;t agree with anything here, please don’t
           use our services.
         </div>
 
         <div className="text-xl">Who Can Use It</div>
         <div className="section-description !text-stone-500 text-md sm:text-xl">
-          You must be at least 13 years old to use frozi.lol. If you're under
-          13, you'll need permission from a parent or guardian. You're fully
+          You must be at least 13 years old to use frozi.lol. If you&quot;re under
+          13, you&quot;ll need permission from a parent or guardian. You&quot;re fully
           responsible for anything you do on the site.
         </div>
 
@@ -51,7 +51,7 @@ const Text = () => {
         <div className="text-xl">User Content</div>
         <div className="section-description !text-stone-500 text-md sm:text-xl">
           If you upload or post anything to frozi.lol (like posts, comments, or
-          files), you still own it — but you're giving us the right to display
+          files), you still own it — but you&quot;re giving us the right to display
           and share it within our platform.
         </div>
 

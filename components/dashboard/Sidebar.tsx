@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { GoHome } from "react-icons/go";
 import { TbBrandGoogleAnalytics, TbTemplate } from "react-icons/tb";
-import { MdOutlineBadge, MdLink, MdOutlineDiamond } from "react-icons/md";
+import { MdOutlineBadge, MdLink } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { LuPaintbrush } from "react-icons/lu";
 

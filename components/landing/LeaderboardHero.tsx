@@ -5,9 +5,11 @@ import React from "react";
 const LeaderboardHero = () => {
   return (
     <section className="relative hero-box justify-center items-center text-center">
-      <img
+      <Image
         src="/images/banner.png"
         alt="Leaderboard Banner"
+        width={1920}
+        height={1080}
         className="absolute inset-0 w-full !h-full object-cover -z-50 overflow-hidden"
       />
       <div className="absolute inset-0 bg-[rgba(15,15,18,0.7)] -z-40 h-full overflow-hidden" />

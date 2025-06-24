@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, FormEvent, useEffect } from "react";
+import React, { useState, FormEvent, useEffect, Suspense } from "react";
 import toast from "react-hot-toast";
 
 import Link from "next/link";
@@ -16,7 +16,7 @@ interface FirebaseError extends Error {
   code: string;
 }
 
-const RegisterPage = () => {
+const Register = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [username, setUsername] = useState<string>("");
@@ -35,7 +35,7 @@ const RegisterPage = () => {
     if (searchPromo && searchPromo.length >= 3) {
       setPromo(searchPromo);
     }
-  }, [searchParams]);
+  }, [searchUsername, searchPromo]);
 
   const { createUser } = AuthData();
 
@@ -66,6 +66,7 @@ const RegisterPage = () => {
     } catch (e) {
       setIsLoading(false);
       toast.error("Checking username availability failed.");
+      console.error(e);
       return;
     }
 
@@ -76,9 +77,7 @@ const RegisterPage = () => {
         return;
       }
 
-      const { valid, data, error } = await validatePromoCode(
-        promo.toLowerCase()
-      );
+      const { valid, error } = await validatePromoCode(promo.toLowerCase());
 
       if (error) {
         setIsLoading(false);
@@ -205,6 +204,14 @@ const RegisterPage = () => {
         </form>
       </div>
     </section>
+  );
+};
+
+const RegisterPage = async () => {
+  return (
+    <Suspense>
+      <Register />
+    </Suspense>
   );
 };
 
