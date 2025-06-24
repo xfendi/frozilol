@@ -61,9 +61,7 @@ const LinksPage = () => {
     setLoading(true);
 
     try {
-      console.log(openModal.name, providedLink);
-
-      await fetch("/api/profile/add-link", {
+      const response = await fetch("/api/profile/add-link", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,10 +72,17 @@ const LinksPage = () => {
           providedLink: providedLink,
         }),
       });
+
+      if (response.status === 500) {
+        toast.error("Something went wrong!");
+        return;
+      }
+
+      toast.success(`${openModal.friendlyName} link added successfully`);
     } catch (err: any) {
       console.error(err);
+      toast.error("Something went wrong!");
     } finally {
-      toast.success(`${openModal.friendlyName} link added successfully`);
       setLoading(false);
       closeModal();
     }

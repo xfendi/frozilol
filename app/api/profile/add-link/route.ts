@@ -39,34 +39,46 @@ export async function POST(req: Request) {
       .collection("profiles")
       .doc(profile?.id.toString());
 
-    let databaseLink;
+    const profileData = await profileDocRef.get().then((doc) => doc.data());
+
+    let databaseLink = {
+      name,
+      type,
+      linkMode: linkData?.linkMode,
+      link: "",
+    };
 
     if (type === "socials") {
-      databaseLink = {
-        name: name,
-        type: type,
-        linkType: "href",
-        link: `https://${linkData?.profileStartLink}${providedLink}`,
-      };
+      databaseLink.link = `https://${linkData?.profileStartLink}${providedLink}`;
     } else if (type === "other") {
-      databaseLink = {
-        name: name,
-        type: type,
-        linkType: "href",
-        link: `https://${providedLink}`,
-      };
+      databaseLink.link = `https://${providedLink}`;
+    } else if (type === "email") {
+      databaseLink.link = `mailto:${providedLink}`;
     } else {
-      databaseLink = {
-        name: name,
-        type: type,
-        linkType: "copy",
-        link: providedLink,
-      };
+      databaseLink.link = providedLink;
     }
 
-    await profileDocRef.update({
-      links: admin.firestore.FieldValue.arrayUnion(databaseLink),
-    });
+    try {
+      if (
+        profileData?.links &&
+        Array.isArray(profileData.links) &&
+        profileData.links.length > 0
+      ) {
+        await profileDocRef.update({
+          links: admin.firestore.FieldValue.arrayUnion(databaseLink),
+        });
+      } else {
+        await profileDocRef.update({
+          links: [databaseLink],
+        });
+      }
+    } catch (err) {
+      console.error("Error adding link to profile:", err);
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ success: true }, { status: 201 });
   } catch (err: any) {

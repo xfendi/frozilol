@@ -97,11 +97,19 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
       const userDocData = querySnapshot.docs[0].data();
       const currentLinks = userDocData.links || [];
 
+      let linkToSet;
+
+      if (link.linkMode === "href") {
+        linkToSet = `https://${linkData?.profileStartLink}${editLink}`;
+      } else {
+        linkToSet = editLink;
+      }
+
       const updatedLinks = currentLinks.map((l: LinkType) => {
         if (l.link === link.link) {
           return {
             ...l,
-            link: `https://${linkData?.profileStartLink}${editLink}`,
+            link: linkToSet,
           };
         }
 
@@ -117,6 +125,13 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
       setLoading(false);
       setIsEditModalOpen(false);
     }
+  };
+
+  const handleCloseEditModal = () => {
+    setIsEditModalOpen(false);
+    setTimeout(() => {
+      setEditLink(cleanLinkProfile);
+    }, 300);
   };
 
   return (
@@ -174,7 +189,7 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
       </div>
       <Modal
         isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
+        onClose={handleCloseEditModal}
         title={`Edit ${linkData?.friendlyName}`}
         content={
           <div className="input_container">
