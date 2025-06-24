@@ -1,7 +1,7 @@
 "use client";
 
 import { AuthData } from "@/context/authContext";
-import { LinkType, linkTypes } from "@/data/links";
+import { FolderType, folederNames, LinkType, linkTypes } from "@/data/links";
 import { db } from "@/firebase";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -32,7 +32,11 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
   const linksMap: LinkType[] = linkTypes[link.type as keyof typeof linkTypes];
   const linkData = linksMap.find((l) => l.name === link.name);
 
-  const cleanLink = link?.link?.replace(/^https?:\/\//, "");
+  let cleanLink = link?.link?.replace(/^https?:\/\//, "");
+  if (link.type === "email") {
+    cleanLink = link?.link?.replace(/^mailto:/, "");
+  }
+
   const cleanLinkProfile = cleanLink?.replace(
     new RegExp(`^${linkData?.profileStartLink}`),
     ""
@@ -100,9 +104,17 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
       let linkToSet;
 
       if (link.linkMode === "href") {
-        linkToSet = `https://${linkData?.profileStartLink}${editLink}`;
+        if (link.type === "other") {
+          linkToSet = `${linkData?.profileStartLink}${editLink}`;
+        } else {
+          linkToSet = `https://${linkData?.profileStartLink}${editLink}`;
+        }
       } else {
-        linkToSet = editLink;
+        if (link.type === "email") {
+          linkToSet = `mailto:${editLink}`;
+        } else {
+          linkToSet = editLink;
+        }
       }
 
       const updatedLinks = currentLinks.map((l: LinkType) => {
@@ -166,7 +178,9 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
             </div>
             <div className="input_body !w-full">
               <Image
-                src={`/${link?.type}/${link?.name}.png`}
+                src={`/${folederNames[link?.type as FolderType]}/${
+                  link?.name
+                }.png`}
                 className="!mr-2"
                 alt={link?.name || ""}
                 width={24}
@@ -195,7 +209,9 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
           <div className="input_container">
             <div className="input_body">
               <Image
-                src={`/${link?.type}/${link?.name}.png`}
+                src={`/${folederNames[linkData?.type as FolderType]}/${
+                  linkData?.name
+                }.png`}
                 className="!mr-2"
                 alt={linkData?.name || ""}
                 width={24}

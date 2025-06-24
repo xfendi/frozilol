@@ -4,7 +4,14 @@ import { DndLinks } from "@/components/dashboard/DndLinks";
 import Modal from "@/components/global/modal";
 import NamePlateContainer from "@/components/global/namePlateContainer";
 import { AuthData } from "@/context/authContext";
-import { crypto, LinkType, socials } from "@/data/links";
+import {
+  crypto,
+  FolderType,
+  folederNames,
+  LinkType,
+  others,
+  socials,
+} from "@/data/links";
 import { db } from "@/firebase";
 import {
   collection,
@@ -145,7 +152,9 @@ const LinksPage = () => {
                   onClick={() => openLinkModal(s)}
                 >
                   <Image
-                    src={`/socials/${s.name}.png`}
+                    src={`/${folederNames[s?.type as FolderType]}/${
+                      s?.name
+                    }.png`}
                     alt={s.name}
                     width={32}
                     height={32}
@@ -165,8 +174,32 @@ const LinksPage = () => {
                   onClick={() => openLinkModal(c)}
                 >
                   <Image
-                    src={`/crypto/${c.name}.png`}
+                    src={`/${folederNames[c?.type as FolderType]}/${
+                      c?.name
+                    }.png`}
                     alt={c.name}
+                    width={32}
+                    height={32}
+                  />
+                </button>
+              </NamePlateContainer>
+            ))}
+          </div>
+          <div className="feature-title max-w-sm text-xl font-semibold">
+            Other
+          </div>
+          <div className="flex flex-wrap gap-4">
+            {others.map((o) => (
+              <NamePlateContainer text={o.friendlyName} key={o.name}>
+                <button
+                  className="btn-outline !p-4"
+                  onClick={() => openLinkModal(o)}
+                >
+                  <Image
+                    src={`/${folederNames[o?.type as FolderType]}/${
+                      o?.name
+                    }.png`}
+                    alt={o.name}
                     width={32}
                     height={32}
                   />
@@ -186,7 +219,9 @@ const LinksPage = () => {
           <div className="input_container">
             <div className="input_body">
               <Image
-                src={`/${openModal?.type}/${openModal?.name}.png`}
+                src={`/${folederNames[openModal?.type as FolderType]}/${
+                  openModal?.name
+                }.png`}
                 className="!mr-2"
                 alt={openModal?.name || ""}
                 width={24}

@@ -315,7 +315,7 @@ export const crypto: LinkType[] = [
 export const others: LinkType[] = [
   {
     name: "other",
-    friendlyName: "Other",
+    friendlyName: "Custom URL",
     type: "other",
     linkMode: "href",
     link: "",
@@ -327,6 +327,7 @@ export const others: LinkType[] = [
     type: "email",
     linkMode: "copy",
     link: "",
+    profileStartLink: "mailto:",
   },
 ];
 
@@ -335,4 +336,15 @@ export type LinkTypesType = "socials" | "crypto";
 export const linkTypes = {
   socials: socials,
   crypto: crypto,
+  other: others,
+  email: others,
+};
+
+export type FolderType = keyof typeof folederNames;
+
+export const folederNames = {
+  socials: "socials",
+  crypto: "crypto",
+  other: "others",
+  email: "others",
 };
