@@ -12,6 +12,7 @@ import ChangeEmailButton from "@/components/dashboard/ChangeEmailButton";
 import LogoutButton from "@/components/auth/LogoutButton";
 import ChangePasswordButton from "@/components/dashboard/ChangePasswordButton";
 import LinkDiscordButton from "@/components/discord/LinkDiscordButton";
+import Loader from "@/components/global/loader";
 
 const SettingsPage = () => {
   const [opanModal, setOpenModal] = useState<string>("");
@@ -59,6 +60,14 @@ const SettingsPage = () => {
     setLoading(false);
     setOpenModal("");
   };
+
+  if (!profile.id) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Loader big white />
+      </div>
+    );
+  }
 
   return (
     <section className="flex flex-col gap-4">

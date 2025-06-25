@@ -1,6 +1,7 @@
 "use client";
 
 import { DndLinks } from "@/components/dashboard/DndLinks";
+import Loader from "@/components/global/loader";
 import Modal from "@/components/global/modal";
 import NamePlateContainer from "@/components/global/namePlateContainer";
 import { AuthData } from "@/context/authContext";
@@ -139,6 +140,20 @@ const LinksPage = () => {
       console.error("Error updating order:", error);
     }
   };
+
+  if (
+    !user.uid ||
+    !links.length ||
+    !socials.length ||
+    !crypto.length ||
+    !others.length
+  ) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Loader big white />
+      </div>
+    );
+  }
 
   return (
     <>
