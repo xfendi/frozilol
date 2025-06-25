@@ -1,9 +1,9 @@
 import { LinkType, linkTypes, LinkTypesType } from "@/data/links";
-import { auth, db } from "@/firebase-admin";
+import { db } from "@/firebase-admin";
 import { getServerProfile } from "@/lib/data/getServerProfile";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import admin from "firebase-admin";
+import { getServerUser } from "@/lib/data/getServerUser";
 
 export async function POST(req: Request) {
   try {
@@ -20,18 +20,12 @@ export async function POST(req: Request) {
     const linksMap: LinkType[] = linkTypes[type as LinkTypesType];
     const linkData = linksMap.find((l) => l.name === name);
 
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("__session")?.value;
-
-    if (!sessionCookie) {
-      return NextResponse.json(
-        { error: "Unauthorized - no session cookie" },
-        { status: 401 }
-      );
+    const user = await getServerUser();
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
-    const uid = decodedClaims.uid;
+    const uid = user.uid;
 
     const profile = await getServerProfile(uid);
 

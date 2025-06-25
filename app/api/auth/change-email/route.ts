@@ -1,28 +1,22 @@
 import { auth, db } from "@/firebase-admin";
 import { getServerProfile } from "@/lib/data/getServerProfile";
-import { cookies } from "next/headers";
+import { getServerUser } from "@/lib/data/getServerUser";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const cookieStore = await cookies();
-    const sessionCookie = cookieStore.get("__session")?.value;
+    const user = await getServerUser();
 
-    if (!sessionCookie) {
-      return NextResponse.json(
-        { error: "Unauthorized - no session cookie" },
-        { status: 401 }
-      );
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 400 });
     }
-
-    const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
 
     const { newEmail } = await req.json();
     if (!newEmail) {
       return NextResponse.json({ error: "Missing newEmail" }, { status: 400 });
     }
 
-    const uid = decodedClaims.uid;
+    const uid = user.uid;
 
     await auth.updateUser(uid, { email: newEmail });
 

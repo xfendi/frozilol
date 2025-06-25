@@ -17,9 +17,9 @@ export async function POST(req: Request) {
   cookieStore.set("__session", sessionCookie, {
     maxAge: expiresIn / 1000,
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     path: "/",
-    sameSite: "strict",
+    sameSite: "lax",
   });
 
   return NextResponse.json({ status: "success" });
