@@ -6,15 +6,20 @@ import { getServerUser } from "@/lib/data/getServerUser";
 import { getDiscordAvatarURL } from "@/lib/discord/getDiscordAvatarURL";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-  const redirectURL = `${req.nextUrl.origin}/dashboard?tab=settings`;
+const popupResponse = (success: boolean, error?: string) => {
+  return new Response(
+    `<script>
+      window.opener.postMessage({ success: ${success}, error: "${error}" }, "*");
+      window.close();
+    </script>`,
+    { headers: { "Content-Type": "text/html" } }
+  );
+};
 
+export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
   if (!code) {
-    return NextResponse.json(
-      { error: "Missing code parameter" },
-      { status: 400 }
-    );
+    return popupResponse(false, "Missing code parameter");
   }
 
   const creds = Buffer.from(
@@ -22,10 +27,7 @@ export async function GET(req: NextRequest) {
   ).toString("base64");
 
   if (!creds) {
-    return NextResponse.json(
-      { error: "Missing discord credentials" },
-      { status: 400 }
-    );
+    return popupResponse(false, "Missing discord credentials");
   }
 
   const tokenRes = await fetch("https://discord.com/api/oauth2/token", {
@@ -45,10 +47,7 @@ export async function GET(req: NextRequest) {
 
   if (!tokenRes.ok) {
     console.error("Token fetch error:", tokenData);
-    return NextResponse.json(
-      { error: "Discord token request failed", details: tokenData },
-      { status: 400 }
-    );
+    return popupResponse(false, "Discord token request failed");
   }
 
   const access_token = tokenData.access_token;
@@ -65,23 +64,20 @@ export async function GET(req: NextRequest) {
     discordUser = await userRes.json();
   } catch (err) {
     console.error("User fetch error:", err);
-    return NextResponse.json(
-      { error: "Discord user request failed", details: err },
-      { status: 400 }
-    );
+    return popupResponse(false, "Discord user request failed");
   }
 
   const user = await getServerUser();
 
   if (!user) {
-    return { error: "User not found" };
+    return popupResponse(false, "User not found");
   }
 
   const userId = user.uid;
   const profile = await getServerProfile(userId);
 
   if (!profile) {
-    return { error: "Profile not found" };
+    return popupResponse(false, "Profile not found");
   }
 
   const discordCleanUserData = {
@@ -100,5 +96,5 @@ export async function GET(req: NextRequest) {
     { merge: true }
   );
 
-  return NextResponse.redirect(redirectURL);
+  return popupResponse(true);
 }
