@@ -168,3 +168,33 @@ main {
   border-radius: 12px;
   background-color: var(--utility-gray-100);
 }
+
+.scrollable-div {
+  overflow-y: auto;
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+.scrollable-div::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+  background-color: var(--utility-gray-100);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb:hover {
+  background-color: red;
+}
+
+/* Firefox */
+.scrollable-div {
+  scrollbar-width: thin;
+  scrollbar-color: var(--utility-gray-100) transparent;
+}
