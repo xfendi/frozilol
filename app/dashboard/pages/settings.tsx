@@ -11,6 +11,7 @@ import { maxInputLength } from "@/data/inputs";
 import ChangeEmailButton from "@/components/dashboard/ChangeEmailButton";
 import LogoutButton from "@/components/auth/LogoutButton";
 import ChangePasswordButton from "@/components/dashboard/ChangePasswordButton";
+import LinkDiscordButton from "@/components/discord/LinkDiscordButton";
 
 const SettingsPage = () => {
   const [opanModal, setOpenModal] = useState<string>("");
@@ -18,7 +19,11 @@ const SettingsPage = () => {
 
   const { profile } = ProfileData();
 
-  const handleSubmit = async (e: React.FormEvent, value: string, type: string) => {
+  const handleSubmit = async (
+    e: React.FormEvent,
+    value: string,
+    type: string
+  ) => {
     e.preventDefault();
     setLoading(true);
 
@@ -91,6 +96,7 @@ const SettingsPage = () => {
       <div className="dashboard__section-main flex flex-col gap-4 xl:w-1/3">
         <ChangeEmailButton />
         <ChangePasswordButton />
+        <LinkDiscordButton />
         <LogoutButton />
       </div>
 
