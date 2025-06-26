@@ -33,13 +33,13 @@ const ThemeSection = ({
                     <Image
                       src={
                         profile.photoURL ||
-                        profile.discordClear.avatarURL ||
+                        profile.discordClear?.avatarURL ||
                         defaultPhotoURL
                       }
-                      className="rounded-full"
+                      className="rounded-full !w-[42px] !h-[42px] !object-cover"
                       alt="link Icon"
-                      width={48}
-                      height={48}
+                      width={42}
+                      height={42}
                     />
                     <div className="feature-title max-w-sm text-xl font-semibold">
                       {profile.displayName || profile.username}
@@ -56,10 +56,10 @@ const ThemeSection = ({
                   <Image
                     src={
                       profile.photoURL ||
-                      profile.discordClear.avatarURL ||
+                      profile.discordClear?.avatarURL ||
                       defaultPhotoURL
                     }
-                    className="rounded-full"
+                    className="rounded-full !w-[64px] !h-[64px] !object-cover"
                     alt="link Icon"
                     width={64}
                     height={64}

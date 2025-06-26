@@ -23,7 +23,7 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
         <Image
           src={profileData.photoURL}
           alt={profileData.username}
-          className="rounded-full"
+          className="rounded-full !w-[120px] !h-[120px] !object-cover"
           width={120}
           height={120}
         />
