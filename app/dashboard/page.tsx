@@ -4,17 +4,11 @@ import { Metadata } from "next";
 
 import { getServerProfile } from "@/lib/data/getServerProfile";
 import { getServerUser } from "@/lib/data/getServerUser";
-import { proTabs, tabs } from "@/data/dashboard";
 import Header from "@/components/dashboard/Header";
 import Sidebar from "@/components/dashboard/Sidebar";
+import PageRenderer from "@/components/dashboard/DynamicPageRenderer";
 
 import "@/styles/dashboard.css";
-
-import NotFoundPage from "@/components/dashboard/other/notFound";
-import NoProPage from "@/components/dashboard/other/noPro";
-
-import LinksPage from "./pages/links";
-import SettingsPage from "./pages/settings";
 
 export const metadata: Metadata = {
   title: "frozi.lol | Dashboard",
@@ -25,41 +19,33 @@ type Props = {
 };
 
 const Dashboard = async ({ searchParams }: Props) => {
-  const { tab } = await searchParams;
-  const user = await getServerUser();
+  console.log("Loading dashboard ... 🚀");
 
-  if (!user) {
+  const { tab } = await searchParams;
+
+  const [profileData] = await Promise.all([
+    getServerUser().then((u) => (u ? getServerProfile(u.uid) : null)),
+  ]);
+
+  if (!profileData) {
     redirect("/auth/login");
   }
 
-  const profileData = await getServerProfile(user.uid);
+  console.log("Profile data loaded! 🎉");
 
   const isPro = profileData?.premium || false;
 
-  type TabType = (typeof tabs)[number];
-
-  const currentTab: TabType = tabs.includes(tab as TabType)
-    ? (tab as TabType)
-    : "overview";
-
-  const pages: Record<TabType, React.ReactNode> = {
-    links: <LinksPage />,
-    settings: <SettingsPage />,
-  };
-
-  let pageToRender = pages[currentTab];
-
-  if (!pages[currentTab]) {
-    pageToRender = <NotFoundPage />;
-  } else if (proTabs.includes(currentTab) && !isPro) {
-    pageToRender = <NoProPage />;
+  if (!tab) {
+    redirect("/dashboard?tab=overview");
   }
 
   return (
     <div className="app admin flex flex-row">
       <Header tab={tab} />
       <Sidebar tab={tab} premium={isPro} />
-      <main className="scrollable-div">{pageToRender}</main>
+      <main className="scrollable-div">
+        <PageRenderer tab={tab} isPro={isPro} />
+      </main>
     </div>
   );
 };

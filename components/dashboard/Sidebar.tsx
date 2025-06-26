@@ -41,10 +41,13 @@ const Sidebar = async ({
   };
 
   const SidebarItem = ({ tabName }: { tabName: string }) => {
+    const isActive = currentTab === tabName;
+
     return (
       <Link
-        href={{ query: { tab: tabName } }}
-        className={`sidebar__nav-link ${currentTab === tabName && "active"}`}
+        href={`/dashboard?tab=${tabName}`}
+        prefetch={true}
+        className={`sidebar__nav-link ${isActive && "active"}`}
       >
         {icons[tabName]}
         <p>{tabName.charAt(0).toUpperCase() + tabName.slice(1)}</p>

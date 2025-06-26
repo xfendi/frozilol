@@ -151,6 +151,7 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
       <div ref={setNodeRef} style={style} className="link-card">
         <div
           className="flex items-center justify-center bg-(--border-secondary) rounded-[12px] h-full !p-1 cursor-grab"
+          aria-label="Drag to reorder"
           {...attributes}
           {...listeners}
         >
@@ -165,12 +166,14 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
                 <button
                   className="btn-opacity !p-1.5 !rounded-[8px]"
                   onClick={() => setIsEditModalOpen(true)}
+                  title="Edit link"
                 >
                   <Pencil color="var(--color-stone-500)" size={16} />
                 </button>
                 <button
                   className="btn-opacity !p-1.5 !rounded-[8px]"
                   onClick={handleDelete}
+                  title="Delete link"
                 >
                   <Trash color="var(--color-red-500)" size={16} />
                 </button>
@@ -201,6 +204,7 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
           </div>
         </div>
       </div>
+
       <Modal
         isOpen={isEditModalOpen}
         onClose={handleCloseEditModal}

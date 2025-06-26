@@ -4,7 +4,7 @@ import { db } from "@/firebase-admin";
 import { getServerProfile } from "@/lib/data/getServerProfile";
 import { getServerUser } from "@/lib/data/getServerUser";
 import { getDiscordAvatarURL } from "@/lib/discord/getDiscordAvatarURL";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 const popupResponse = (success: boolean, error?: string) => {
   return new Response(

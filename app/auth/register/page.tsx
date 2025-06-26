@@ -207,7 +207,7 @@ const Register = () => {
   );
 };
 
-const RegisterPage = async () => {
+const RegisterPage = () => {
   return (
     <Suspense>
       <Register />

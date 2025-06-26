@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   const params = new URLSearchParams({
     client_id: process.env.DISCORD_CLIENT_ID!,
     redirect_uri: process.env.DISCORD_REDIRECT_URI!,

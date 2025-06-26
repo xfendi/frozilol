@@ -32,6 +32,7 @@ const Modal: React.FC<ModalProps> = ({
             type="button"
             className="btn-opacity !p-0.5 !rounded-[8px]"
             onClick={onClose}
+            title="Close modal"
           >
             <IoIosClose size={24} />
           </button>

@@ -165,6 +165,7 @@ const LinksPage = () => {
                 <button
                   className="btn-outline !p-4"
                   onClick={() => openLinkModal(s)}
+                  title={s.friendlyName}
                 >
                   <Image
                     src={`/${folederNames[s?.type as FolderType]}/${
@@ -187,6 +188,7 @@ const LinksPage = () => {
                 <button
                   className="btn-outline !p-4"
                   onClick={() => openLinkModal(c)}
+                  title={c.friendlyName}
                 >
                   <Image
                     src={`/${folederNames[c?.type as FolderType]}/${
@@ -209,6 +211,7 @@ const LinksPage = () => {
                 <button
                   className="btn-outline !p-4"
                   onClick={() => openLinkModal(o)}
+                  title={o.friendlyName}
                 >
                   <Image
                     src={`/${folederNames[o?.type as FolderType]}/${
