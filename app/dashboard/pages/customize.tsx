@@ -6,8 +6,6 @@ import { ProfileData } from "@/context/profileContext";
 import {
   CustomizeDataType,
   defaultCustomizeData,
-  linkStyles,
-  themes,
 } from "@/data/customize";
 import { db } from "@/firebase";
 import { doc, updateDoc } from "firebase/firestore";
@@ -17,6 +15,7 @@ import toast from "react-hot-toast";
 import "@/styles/profile.css";
 import ThemeSection from "@/components/dashboard/customize/ThemeSection";
 import AssetsSection from "@/components/dashboard/customize/AssetsSection";
+import PremiumWrapper from "@/components/global/premiumWrapper";
 
 const CustomizePage = () => {
   const [editData, setEditData] = useState<CustomizeDataType | null>();
@@ -101,8 +100,18 @@ const CustomizePage = () => {
   return (
     <>
       <section className="flex flex-col gap-4">
-        <ThemeSection editData={editData} updateEditData={updateEditData} profile={profile} />
-        <AssetsSection editData={editData} updateEditData={updateEditData} profile={profile} />
+        <PremiumWrapper>
+          <ThemeSection
+            editData={editData}
+            updateEditData={updateEditData}
+            profile={profile}
+          />
+        </PremiumWrapper>
+        <AssetsSection
+          editData={editData}
+          updateEditData={updateEditData}
+          profile={profile}
+        />
       </section>
 
       <BottomPopup

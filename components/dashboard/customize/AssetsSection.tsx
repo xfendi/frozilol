@@ -14,12 +14,12 @@ const AssetsSection = ({
 }) => {
   return (
     <div className="dashboard__section-main flex 2xl:flex-row flex-col gap-4">
-      <div className="flex gap-4 flex-1">
+      <div className="flex flex-col lg:flex-row gap-4 flex-1">
         <div className="flex flex-col gap-4 text-start flex-1">
           <div className="feature-title max-w-sm text-xl font-semibold flex items-center gap-4">
             Background
           </div>
-          <div className="flex lg:flex-row flex-col gap-4 lg:h-[200px] h-[400px]">
+          <div className="flex lg:flex-row flex-col gap-4 !h-[200px]">
             <BackgroundInput />
           </div>
         </div>
@@ -27,15 +27,15 @@ const AssetsSection = ({
           <div className="feature-title max-w-sm text-xl font-semibold flex items-center gap-4">
             Audio
           </div>
-          <div className="flex lg:flex-row flex-col gap-4 lg:h-[200px] h-[400px]"></div>
+          <div className="flex lg:flex-row flex-col gap-4 !h-[200px]"></div>
         </div>
       </div>
-      <div className="flex gap-4 flex-1">
+      <div className="flex flex-col lg:flex-row gap-4 flex-1">
         <div className="flex flex-col gap-4 text-start flex-1">
           <div className="feature-title max-w-sm text-xl font-semibold flex items-center gap-4">
             Profile Picture
           </div>
-          <div className="flex lg:flex-row flex-col gap-4 lg:h-[200px] h-[400px]">
+          <div className="flex lg:flex-row flex-col gap-4 !h-[200px]">
             <ProfilePictureInput />
           </div>
         </div>
@@ -43,7 +43,7 @@ const AssetsSection = ({
           <div className="feature-title max-w-sm text-xl font-semibold flex items-center gap-4">
             Custom Cursor <PremiumPlate />
           </div>
-          <div className="flex lg:flex-row flex-col gap-4 lg:h-[200px] h-[400px]"></div>
+          <div className="flex lg:flex-row flex-col gap-4 !h-[200px]"></div>
         </div>
       </div>
     </div>

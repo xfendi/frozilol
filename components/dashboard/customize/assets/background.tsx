@@ -31,7 +31,7 @@ const BackgroundInput = () => {
       <input type="file" id="backgroundFile" onChange={handleChange} />
 
       {profile?.customize.background ? (
-        <div className="select-card_nohover !p-0 relative !cursor-auto">
+        <div className="select-card_nohover !p-0 relative !cursor-auto !h-[200px]">
           <Image
             src={profile.customize.background.URL}
             alt="background"

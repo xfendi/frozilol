@@ -31,7 +31,7 @@ const ProfilePictureInput = () => {
       <input type="file" id="profileFile" onChange={handleChange} />
 
       {profile?.customize.pfp ? (
-        <div className="select-card_nohover !p-0 relative !cursor-auto">
+        <div className="select-card_nohover !p-0 relative !cursor-auto !h-[200px]">
           <Image
             src={profile.customize.pfp.URL}
             alt="profile picture"
