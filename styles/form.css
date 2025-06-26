@@ -94,71 +94,6 @@ input:focus {
   text-decoration: underline;
 }
 
-.form__buttons {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-}
-
-.form__buttons a {
-  width: 100%;
-}
-
-.form__cont {
-  display: flex;
-  gap: 10px;
-}
-
-.form__cont img {
-  border-radius: 50%;
-}
-
-/* ---------------------------------------------------------------- */
-
-.color__selector-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.color__selector {
-  display: flex;
-  gap: 2px;
-}
-
-.color__selector-color-box {
-  padding: 2px;
-  border-radius: 50%;
-  transition: var(--transition-default);
-}
-
-.color__selector-color {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* ---------------------------------------------------------------- */
-
-.profile__theme__button {
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  transition: var(--transition-default);
-  border: 2px solid transparent;
-  border-radius: 15px;
-  padding: 2px;
-}
-
-.profile__theme__button.active {
-  border: var(--color-primary) 2px solid;
-}
-
-.profile__theme__button img {
-  border-radius: 13px;
-}
-
 /* ---------------------------------------------------------------- */
 
 .file-input {
@@ -177,75 +112,6 @@ input[type="file"] {
 
 #img[type="file"] {
   display: block;
-}
-
-/* ---------------------------------------------------------------- */
-
-.profile__plan__button {
-  border-radius: 15px;
-  width: 100%;
-  transition: all 0.3s;
-  border: 1px solid var(--color-light-gray);
-}
-
-.profile__plan__button:hover {
-  background-color: var(--color-light-gray);
-}
-
-.profile__plan__button.active {
-  border: var(--color-primary) 1px solid;
-}
-
-.input__plan__small {
-  justify-content: space-between;
-  align-items: start;
-  text-align: start;
-  gap: 24px;
-  width: 100%;
-  transition: var(--transition-default);
-
-  padding: 24px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.form__plan__description-list {
-  border-top: 2px solid var(--color-light-gray);
-  width: 100%;
-  padding-top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.form__plan__description-list li {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  font-size: 15px;
-}
-
-.icon-primary {
-  color: var(--color-primary);
-}
-
-.form__plan__small {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.form__plans__time {
-  margin-bottom: 20px;
-  width: 100%;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
-  font-size: 15px;
 }
 
 /*----------------------------------------------------------------*/
@@ -367,55 +233,6 @@ input[type="radio"]:checked::before {
   transform: scale(1);
 }
 
-.input__project {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 10px;
-  padding: 5px 10px 5px 5px;
-  transition: var(--transition-default);
-  border: var(--color-light-gray) 1px solid;
-}
-
-.input__project-content {
-  display: flex;
-  align-items: center;
-  text-align: start;
-  transition: all 0.3s;
-  gap: 10px;
-}
-
-.input__project:hover > .input__project-content {
-  gap: 15px;
-}
-
-.input__project-arrow {
-  opacity: 0;
-  transition: all 0.3s;
-}
-
-.input__project:hover > .input__project-arrow {
-  opacity: 1;
-}
-
-.input__project-name {
-  font-size: 17px;
-  font-weight: 600;
-  white-space: nowrap;
-  max-width: 350px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.input__project-id {
-  font-size: 13px;
-  color: var(--color-mid-gray);
-}
-
-.input__project-text {
-  line-height: 20px;
-}
-
 .projects__list {
   max-height: 55vh;
   display: flex;
@@ -425,7 +242,7 @@ input[type="radio"]:checked::before {
 
 .form-modal {
   z-index: 1000;
-  
+
   position: fixed;
   bottom: 50%;
   left: 50%;
@@ -480,4 +297,40 @@ input[type="radio"]:checked::before {
   .form__top {
     width: 100%;
   }
+
+  .bottom-popup {
+    width: calc(100% - 40px) !important;
+    flex-direction: column;
+  }
+}
+
+.bottom-popup {
+  z-index: 1000;
+
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  opacity: 0;
+
+  width: max-content;
+
+  display: flex;
+  align-items: center;
+  padding: 16px 16px 16px 24px;
+  border-radius: 12px;
+  gap: 24px !important;
+
+  transition: all var(--transition-default);
+  transform: translateY(50%) translateX(-50%);
+
+  pointer-events: none;
+
+  background-color: var(--utility-gray-100);
+  border: 2px solid var(--border-secondary);
+}
+
+.bottom-popup.show {
+  opacity: 1;
+  bottom: 10%;
+  pointer-events: all;
 }

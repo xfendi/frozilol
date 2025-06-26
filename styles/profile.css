@@ -1,0 +1,10 @@
+.link-card {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  border-radius: 12px;
+  padding: 16px;
+  gap: 16px;
+  background-color: var(--utility-gray-100);
+  border: 2px solid var(--border-secondary);
+}
