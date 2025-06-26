@@ -18,11 +18,11 @@ const ProfileCard = async () => {
 
   return (
     <div className="profile-card_container">
-      {user.photoURL ? (
+      {profile.photoURL ? (
         <Image
-          src={user?.photoURL}
+          src={profile.photoURL}
           alt={profile.username}
-          className="rounded-lg"
+          className="rounded-lg !w-[42px] !h-[42px] !object-cover"
           width={42}
           height={42}
         />

@@ -143,7 +143,6 @@ const LinksPage = () => {
 
   if (
     !user.uid ||
-    !links.length ||
     !socials.length ||
     !crypto.length ||
     !others.length
