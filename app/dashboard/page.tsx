@@ -31,8 +31,6 @@ const Dashboard = async ({ searchParams }: Props) => {
     redirect("/auth/login");
   }
 
-  console.log("Profile data loaded! 🎉");
-
   const isPro = profileData?.premium || false;
 
   if (!tab) {

@@ -6,6 +6,9 @@ import NotFoundPage from "@/components/dashboard/other/notFound";
 import NoProPage from "@/components/dashboard/other/noPro";
 import { proTabs, tabs } from "@/data/dashboard";
 
+const CustomizePage = dynamic(() => import("@/app/dashboard/pages/customize"), {
+  ssr: false,
+});
 const LinksPage = dynamic(() => import("@/app/dashboard/pages/links"), {
   ssr: false,
 });
@@ -21,6 +24,7 @@ const PageRenderer = ({ tab, isPro }: { tab: string; isPro: boolean }) => {
     : "overview";
 
   const pages: Record<TabType, React.ReactNode> = {
+    customize: <CustomizePage />,
     links: <LinksPage />,
     settings: <SettingsPage />,
   };
