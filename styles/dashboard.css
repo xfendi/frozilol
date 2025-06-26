@@ -199,7 +199,8 @@ main {
   scrollbar-color: var(--utility-gray-100) transparent;
 }
 
-.select-card {
+.select-card,
+.select-card_nohover {
   flex: 1;
   cursor: pointer;
   display: flex;

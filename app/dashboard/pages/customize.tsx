@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 
 import "@/styles/profile.css";
 import ThemeSection from "@/components/dashboard/customize/ThemeSection";
+import AssetsSection from "@/components/dashboard/customize/AssetsSection";
 
 const CustomizePage = () => {
   const [editData, setEditData] = useState<CustomizeDataType | null>();
@@ -101,6 +102,7 @@ const CustomizePage = () => {
     <>
       <section className="flex flex-col gap-4">
         <ThemeSection editData={editData} updateEditData={updateEditData} profile={profile} />
+        <AssetsSection editData={editData} updateEditData={updateEditData} profile={profile} />
       </section>
 
       <BottomPopup
