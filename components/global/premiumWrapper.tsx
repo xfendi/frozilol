@@ -7,11 +7,11 @@ import "@/styles/profile.css";
 import Link from "next/link";
 
 const PremiumWrapper = ({ children }: { children: React.ReactNode }) => {
-  const profile = ProfileData();
+  const { profile } = ProfileData();
   const isPremium = profile?.premium;
 
   return (
-    <div className="relative">
+    <div className="relative !w-full">
       <div
         className={
           isPremium
@@ -28,7 +28,10 @@ const PremiumWrapper = ({ children }: { children: React.ReactNode }) => {
             Upgrade to Premium to access this content 💎
           </div>
           <p className="profile-card__id text-center">
-            <Link href="/shop/premium" className="cursor-pointer !underline">Upgrade Here</Link> to get premium access!
+            <Link href="/shop/premium" className="cursor-pointer !underline">
+              Upgrade Here
+            </Link>{" "}
+            to get premium access!
           </p>
         </div>
       )}
