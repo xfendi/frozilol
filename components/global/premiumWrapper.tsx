@@ -4,6 +4,7 @@ import { ProfileData } from "@/context/profileContext";
 import React from "react";
 
 import "@/styles/profile.css";
+import Link from "next/link";
 
 const PremiumWrapper = ({ children }: { children: React.ReactNode }) => {
   const profile = ProfileData();
@@ -27,8 +28,7 @@ const PremiumWrapper = ({ children }: { children: React.ReactNode }) => {
             Upgrade to Premium to access this content 💎
           </div>
           <p className="profile-card__id text-center">
-            <button className="cursor-pointer !underline">Hide</button> this
-            content as non-premium user!
+            <Link href="/shop/premium" className="cursor-pointer !underline">Upgrade Here</Link> to get premium access!
           </p>
         </div>
       )}
