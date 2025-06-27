@@ -3,10 +3,7 @@
 import BottomPopup from "@/components/global/bottomPopup";
 import Loader from "@/components/global/loader";
 import { ProfileData } from "@/context/profileContext";
-import {
-  CustomizeDataType,
-  defaultCustomizeData,
-} from "@/data/customize";
+import { CustomizeDataType, defaultCustomizeData } from "@/data/customize";
 import { db } from "@/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
@@ -107,11 +104,7 @@ const CustomizePage = () => {
             profile={profile}
           />
         </PremiumWrapper>
-        <AssetsSection
-          editData={editData}
-          updateEditData={updateEditData}
-          profile={profile}
-        />
+        <AssetsSection />
       </section>
 
       <BottomPopup
