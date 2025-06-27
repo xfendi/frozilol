@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <>
       <div className={`modal-bg ${isOpen ? "show" : ""}`}></div>
-      <div className={`form-modal form__box ${isOpen ? "show" : ""}`}>
+      <div className={`form-modal ${isOpen ? "show" : ""}`}>
         <div className="form__top">
           <div className="form__top-text">
             <div className="form__top-title">{title}</div>
