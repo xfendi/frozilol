@@ -36,8 +36,8 @@ const ProfilePictureInput = () => {
             src={profile.customize.pfp.URL}
             alt="profile picture"
             className="rounded-[12px] object-cover !w-full !h-full"
-            width={120}
-            height={120}
+            width={512}
+            height={512}
           />
           <div className="absolute top-[8px] right-[8px] flex gap-2 items-center">
             <button

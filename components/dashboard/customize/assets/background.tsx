@@ -36,8 +36,8 @@ const BackgroundInput = () => {
             src={profile.customize.background.URL}
             alt="background"
             className="rounded-[12px] object-cover !w-full !h-full"
-            width={120}
-            height={120}
+            width={1280}
+            height={720}
           />
           <div className="absolute top-[8px] right-[8px] flex gap-2 items-center">
             <button
