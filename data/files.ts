@@ -4,7 +4,7 @@ export const fileTypesToExtensions = {
   img: allowedExtensionsImg,
 };
 
-const maxSizeInMB = 4;
+const maxSizeInMB = 5;
 
 export const fileTypesMaxSizeInMB = {
   img: maxSizeInMB,
