@@ -28,7 +28,7 @@ const CursorInput = () => {
 
   return (
     <>
-      <input type="file" id="cursorFile" onChange={handleChange} />
+      <input type="file" id="cursorFile" onChange={handleChange} accept="image/*" />
 
       {profile?.customize.cursor ? (
         <div className="select-card_nohover !p-0 relative !cursor-auto !h-[200px]">
