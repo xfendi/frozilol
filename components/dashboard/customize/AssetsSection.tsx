@@ -6,6 +6,7 @@ import PremiumWrapper from "@/components/global/premiumWrapper";
 import BackgroundInput from "./assets/background";
 import ProfilePictureInput from "./assets/profile";
 import CursorInput from "./assets/cursor";
+import AudioManager from "./assets/audio";
 
 const AssetsSection = () => {
   return (
@@ -23,7 +24,9 @@ const AssetsSection = () => {
           <div className="feature-title max-w-sm text-xl font-semibold flex items-center gap-4">
             Audio
           </div>
-          <div className="flex lg:flex-row flex-col gap-4 !h-[200px]"></div>
+          <div className="flex lg:flex-row flex-col gap-4 !h-[200px]">
+            <AudioManager />
+          </div>
         </div>
       </div>
       <div className="flex flex-col lg:flex-row gap-4 flex-1">
