@@ -8,6 +8,7 @@ import { X } from "lucide-react";
 import toast from "react-hot-toast";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import { handleDeleteFile } from "@/lib/files/handleDeleteFile";
 
 const AudioManagerModal = ({
   isMenuOpen,
@@ -29,9 +30,28 @@ const AudioManagerModal = ({
 
       const existingIndex = audios.findIndex((entry: any) => entry.id === id);
 
-      if (existingIndex !== -1) {
-        audios.splice(existingIndex, 1);
-      }
+      const handleDeleteFile = async (id: string) => {
+        const data = new FormData();
+        data.set("id", id);
+
+        const deleteRequest = await fetch("/api/files/delete", {
+          method: "POST",
+          body: data,
+        });
+
+        if (deleteRequest.status !== 200) {
+          toast.error("Failed to delete file");
+          return;
+        }
+      };
+
+      const coverID = audios[existingIndex].cover?.ID;
+      const audioID = audios[existingIndex].audio?.ID;
+
+      handleDeleteFile(coverID);
+      handleDeleteFile(audioID);
+
+      audios.splice(existingIndex, 1);
 
       await setDoc(
         ref,
