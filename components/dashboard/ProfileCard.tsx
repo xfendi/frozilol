@@ -19,26 +19,15 @@ const ProfileCard = async () => {
 
   return (
     <div className="profile-card_container">
-      {profile.photoURL ? (
-        <Image
-          src={
-            profile.photoURL ||
-            profile.discordClear?.avatarURL ||
-            defaultPhotoURL
-          }
-          alt={profile.username}
-          className="rounded-lg !w-[42px] !h-[42px] !object-cover"
-          width={42}
-          height={42}
-        />
-      ) : (
-        <Image
-          src="/images/main-cube.png"
-          alt="frozi.lol"
-          width={20}
-          height={20}
-        />
-      )}
+      <Image
+        src={
+          profile.photoURL || profile.discordClear?.avatarURL || defaultPhotoURL
+        }
+        alt={profile.username}
+        className="rounded-lg !w-[42px] !h-[42px] !object-cover"
+        width={42}
+        height={42}
+      />
 
       <div className="profile-card_text">
         <a className="profile-card__name" href={`/${profile.username}`}>
