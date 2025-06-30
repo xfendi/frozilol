@@ -1,3 +1,4 @@
+import { defaultPhotoURL } from "@/data/default";
 import { getServerProfile } from "@/lib/data/getServerProfile";
 import { getServerUser } from "@/lib/data/getServerUser";
 import Image from "next/image";
@@ -20,7 +21,11 @@ const ProfileCard = async () => {
     <div className="profile-card_container">
       {profile.photoURL ? (
         <Image
-          src={profile.photoURL}
+          src={
+            profile.photoURL ||
+            profile.discordClear?.avatarURL ||
+            defaultPhotoURL
+          }
           alt={profile.username}
           className="rounded-lg !w-[42px] !h-[42px] !object-cover"
           width={42}
