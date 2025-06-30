@@ -161,7 +161,7 @@ main {
   align-items: center;
 }
 
-.link-card {
+.dashboard-link-card {
   display: flex;
   align-items: center;
   justify-content: space-between;

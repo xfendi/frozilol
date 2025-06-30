@@ -148,7 +148,7 @@ export const SortableLinkItem = ({ link }: { link: LinkType }) => {
 
   return (
     <>
-      <div ref={setNodeRef} style={style} className="link-card">
+      <div ref={setNodeRef} style={style} className="dashboard-link-card">
         <div
           className="flex items-center justify-center bg-(--border-secondary) rounded-[12px] h-full !p-1 cursor-grab"
           aria-label="Drag to reorder"
