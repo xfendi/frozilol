@@ -1,38 +1,56 @@
 "use client";
 
 import React, { useState } from "react";
+import { LuAudioLines } from "react-icons/lu";
 
-import Modal from "@/components/global/modal";
 import { ProfileData } from "@/context/profileContext";
 
-import { LuAudioLines } from "react-icons/lu";
-import { FaItunesNote } from "react-icons/fa";
-
 import "@/styles/profile.css";
-import PremiumInfoBanner from "@/components/global/premiumInfoBanner";
+import AudioManagerModal from "./components/AudioManagerModal";
+import AddAudioModal from "./components/AddAudioModal";
+import toast from "react-hot-toast";
 
 export type AudioFile = {
+  id: string;
   name: string;
-  duration: string;
-  URL: string;
-  ID: string;
-  extension: string;
+  enabled: boolean;
+  audio?: {
+    URL: string;
+    ID: string;
+    extension: string;
+  };
+  cover?: {
+    URL: string;
+    ID: string;
+    extension: string;
+  };
 };
 
 const AudioManager = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [isAddAudioModalOpen, setIsAddAudioModalOpen] = useState(false);
 
   const { profile } = ProfileData();
 
   const handleMenuOpen = () => setIsMenuOpen(true);
   const handleMenuClose = () => setIsMenuOpen(false);
 
-  const handleAddAudio = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Add audio
+  const handleOpenAddAudioModal = () => {
+    if (!profile.premium && profile.customize?.audios?.length >= 2) {
+      toast.error("You can only add up to 2 audios without premium");
+      return;
+    }
+
+    if (profile.premium && profile.customize?.audios?.length >= 4) {
+      toast.error("You can only add up to 4 audios");
+      return;
+    }
 
     setIsMenuOpen(false);
-  }
+    setIsAddAudioModalOpen(true);
+  };
+  const handleCloseAddAudioModal = () => setIsAddAudioModalOpen(false);
 
   return (
     <>
@@ -43,57 +61,18 @@ const AudioManager = () => {
         <LuAudioLines size={48} />
         <p className="profile-card__id text-center">Open Audio Manager Menu.</p>
       </button>
-      <Modal
-        isOpen={isMenuOpen}
-        onClose={handleMenuClose}
-        title="Audio Manager"
-        content={
-          <div className="flex flex-col gap-4">
-            <p className="profile-card__id text-start">
-              To set an audio as active, please select your desired audio by{" "}
-              <br />
-              clicking on it.
-            </p>
-            {!profile.premium && (
-              <PremiumInfoBanner text="Add up to 4 audios with premium" />
-            )}
-            <div className="feature-title max-w-sm text-xl font-semibold flex items-center gap-4">
-              Audios ({profile.customize?.audios?.length ?? 0}/
-              {profile.premium ? "4" : "1"})
-            </div>
-            <div className="flex flex-col gap-4">
-              {Array.isArray(profile.customize?.audios) &&
-              profile.customize?.audios.length > 0 ? (
-                profile.customize?.audios.map(
-                  (audio: AudioFile, index: number) => (
-                    <div className="link-card" key={index}>
-                      <div className="!w-12 !h-12 rounded-[12px] flex justify-center items-center bg-(--color-opacity)">
-                        <FaItunesNote size={24} />
-                      </div>
-                      <div className="flex flex-col text-start">
-                        <div className="feature-title max-w-sm text-md font-semibold">
-                          {audio.name}
-                        </div>
-                        <p className="profile-card__id text-start">
-                          {audio.duration}
-                        </p>
-                      </div>
-                    </div>
-                  )
-                )
-              ) : (
-                <p className="profile-card__id text-start">
-                  There is no audios yet.
-                </p>
-              )}
-            </div>
-            <div className="divider"></div>
-            <button type="button" className="btn-outline !w-full flex gap-2 items-center" onClick={handleAddAudio}>
-              <FaItunesNote size={18} />
-              <p>Add Audio</p>
-            </button>
-          </div>
-        }
+
+      <AudioManagerModal
+        isMenuOpen={isMenuOpen}
+        handleMenuClose={handleMenuClose}
+        profile={profile}
+        handleOpenAddAudioModal={handleOpenAddAudioModal}
+      />
+
+      <AddAudioModal
+        isMenuOpen={isAddAudioModalOpen}
+        handleMenuClose={handleCloseAddAudioModal}
+        profile={profile}
       />
     </>
   );
