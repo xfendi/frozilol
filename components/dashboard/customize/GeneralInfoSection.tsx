@@ -56,7 +56,26 @@ const GeneralInfoSection = ({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-4 flex-1"></div>
+            <div className="flex flex-col gap-4 flex-1">
+              <div className="flex flex-col gap-4 flex-1">
+                <div className="input_container">
+                  <div className="input_title">Discord Presence</div>
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      checked={editData?.discordPresenceEnabled}
+                      onChange={(e) =>
+                        updateEditData(
+                          "discordPresenceEnabled",
+                          e.target.checked
+                        )
+                      }
+                    />
+                    <span className="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex flex-col flex-1">
