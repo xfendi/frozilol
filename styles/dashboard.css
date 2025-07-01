@@ -223,3 +223,26 @@ main {
   background-color: var(--color-opacity);
   border: 2px solid var(--color-primary);
 }
+
+.dropdown-menu {
+  position: absolute;
+  transition: var(--transition-default);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background-color: var(--color-lite-black) !important;
+  border: var(--border-secondary) 2px solid;
+  border-radius: 12px;
+  z-index: 50;
+}
+
+.dropdown-menu ul {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.dropdown-menu ul li:hover {
+  background-color: var(--color-opacity);
+}

@@ -2,6 +2,7 @@ import React from "react";
 
 import { LocationEditIcon } from "lucide-react";
 import { MdDescription } from "react-icons/md";
+import BackgroundEffectSelector from "./effects/BackgroundEffectSelector";
 
 const GeneralInfoSection = ({
   editData,
@@ -14,7 +15,7 @@ const GeneralInfoSection = ({
 }) => {
   return (
     <div className="dashboard__section-main flex 2xl:flex-row flex-col gap-4">
-      <div className="flex gap-4 !w-full">
+      <div className="flex gap-4 !w-full lg:flex-row flex-col">
         <div className="flex flex-col gap-4 flex-1">
           <div className="feature-title max-w-sm text-xl font-semibold flex items-center gap-4">
             General Info
@@ -78,9 +79,19 @@ const GeneralInfoSection = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col gap-4 flex-1">
           <div className="feature-title max-w-sm text-xl font-semibold flex items-center gap-4">
             Effects Customization
+          </div>
+          <div className="divider"></div>
+          <div className="flex gap-4 !w-full 2xl:flex-row flex-col">
+            <div className="flex flex-col gap-4 flex-1">
+              <BackgroundEffectSelector
+                editData={editData}
+                updateEditData={updateEditData}
+              />
+            </div>
+            <div className="flex flex-col gap-4 flex-1"></div>
           </div>
         </div>
       </div>
