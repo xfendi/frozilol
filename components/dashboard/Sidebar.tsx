@@ -7,13 +7,14 @@ import { MdOutlineBadge, MdLink } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { LuPaintbrush } from "react-icons/lu";
 
-import { tabs, proTabs } from "@/data/dashboard";
+import { tabs, proTabs, soonTabs } from "@/data/dashboard";
 
-import PremiumPlate from "@/components/global/premiumPlate";
+import PremiumPlate from "@/components/global/plates/premiumPlate";
 import Cube from "../global/cube";
 import ProfileCard from "./ProfileCard";
 import SidebarBanner from "./SidebarBanner";
 import SharePageButton from "./SharePageButton";
+import SoonPlate from "../global/plates/soonPlate";
 
 const Sidebar = async ({
   tab,
@@ -51,9 +52,10 @@ const Sidebar = async ({
       >
         {icons[tabName]}
         <p>{tabName.charAt(0).toUpperCase() + tabName.slice(1)}</p>
-        {proTabs.includes(tabName) && (
-          <span className="!ml-auto">{<PremiumPlate />}</span>
-        )}
+        <div className="flex items-center gap-2 !ml-auto">
+          {soonTabs.includes(tabName) && <SoonPlate />}
+          {proTabs.includes(tabName) && <PremiumPlate />}
+        </div>
       </Link>
     );
   };

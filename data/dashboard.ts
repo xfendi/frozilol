@@ -10,6 +10,8 @@ export const tabs = [
 
 export const proTabs = ["analytics", "badges"];
 
+export const soonTabs = ["overview", "analytics", "badges", "templates"];
+
 export const headerContent = [
   {
     name: "customize",

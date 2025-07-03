@@ -1,6 +1,6 @@
 import React from "react";
 
-import PremiumPlate from "@/components/global/premiumPlate";
+import PremiumPlate from "@/components/global/plates/premiumPlate";
 import PremiumWrapper from "@/components/global/premiumWrapper";
 
 import BackgroundInput from "./assets/background";

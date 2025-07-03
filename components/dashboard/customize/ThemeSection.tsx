@@ -1,4 +1,4 @@
-import PremiumPlate from "@/components/global/premiumPlate";
+import PremiumPlate from "@/components/global/plates/premiumPlate";
 import { linkStyles, themes } from "@/data/customize";
 import { defaultPhotoURL } from "@/data/default";
 import Image from "next/image";
