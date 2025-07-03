@@ -4,7 +4,8 @@ import dynamic from "next/dynamic";
 import React from "react";
 import NotFoundPage from "@/components/dashboard/other/notFound";
 import NoProPage from "@/components/dashboard/other/noPro";
-import { proTabs, tabs } from "@/data/dashboard";
+import { proTabs, soonTabs, tabs } from "@/data/dashboard";
+import SoonPage from "./other/soonPage";
 
 const CustomizePage = dynamic(() => import("@/app/dashboard/pages/customize"), {
   ssr: false,
@@ -29,7 +30,15 @@ const PageRenderer = ({ tab, isPro }: { tab: string; isPro: boolean }) => {
     settings: <SettingsPage />,
   };
 
-  let pageToRender = pages[currentTab] ?? <NotFoundPage />;
+  let pageToRender;
+
+  if (soonTabs.includes(currentTab)) {
+    console.log("page is coming soon");
+    pageToRender = <SoonPage />;
+  } else {
+    pageToRender = pages[currentTab] ?? <NotFoundPage />;
+  }
+
   if (proTabs.includes(currentTab) && !isPro) {
     pageToRender = <NoProPage />;
   }
