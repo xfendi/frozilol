@@ -6,6 +6,7 @@ import { MdBlock } from "react-icons/md";
 
 import "@/styles/effects.css";
 import TypewriterText from "@/components/effects/typewriter";
+import toast from "react-hot-toast";
 
 export const UsernameEffectOptions = [
   {
@@ -109,6 +110,14 @@ const UsernameEffectButton = ({
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
 
+    if (
+      UsernameEffectData.find((e) => e.value === selectedEffect?.value)
+        ?.premium &&
+      !profile.premium
+    ) {
+      return toast.error("You need to be a Pro user to use this effect!");
+    }
+
     updateEditData("effects", {
       ...editData.effects,
       username: selectedEffect?.value,
@@ -186,7 +195,9 @@ const UsernameEffectButton = ({
                   }`}
                 >
                   {selectedEffect?.value === "typewriter" ? (
-                    <TypewriterText text={profile.displayName || profile.username} />
+                    <TypewriterText
+                      text={profile.displayName || profile.username}
+                    />
                   ) : (
                     <div>{profile.displayName || profile.username}</div>
                   )}
