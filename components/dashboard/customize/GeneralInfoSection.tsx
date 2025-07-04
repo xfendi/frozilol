@@ -3,6 +3,7 @@ import React from "react";
 import { LocationEditIcon } from "lucide-react";
 import { MdDescription } from "react-icons/md";
 import BackgroundEffectSelector from "./effects/BackgroundEffectSelector";
+import UsernameEffectButton from "./effects/UsernameEffectButton";
 
 const GeneralInfoSection = ({
   editData,
@@ -91,7 +92,13 @@ const GeneralInfoSection = ({
                 updateEditData={updateEditData}
               />
             </div>
-            <div className="flex flex-col gap-4 flex-1"></div>
+            <div className="flex flex-col gap-4 flex-1">
+              <UsernameEffectButton
+                editData={editData}
+                updateEditData={updateEditData}
+                profile={profile}
+              />
+            </div>
           </div>
         </div>
       </div>
