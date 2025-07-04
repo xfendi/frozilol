@@ -58,7 +58,7 @@ export const UsernameEffectClassNames = [
   },
   {
     value: "typewriter",
-    className: "typewriter-text",
+    className: "",
   },
 ];
 
@@ -185,7 +185,7 @@ const UsernameEffectButton = ({
                     )?.className
                   }`}
                 >
-                  {selectedEffect?.value === "typewriter-text" ? (
+                  {selectedEffect?.value === "typewriter" ? (
                     <TypewriterText text={profile.displayName || profile.username} />
                   ) : (
                     <div>{profile.displayName || profile.username}</div>
