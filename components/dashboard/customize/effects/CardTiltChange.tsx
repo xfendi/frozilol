@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
+import PremiumPlate from "@/components/global/plates/premiumPlate";
 
 const CardTiltChange = ({
   editData,
@@ -30,7 +31,10 @@ const CardTiltChange = ({
 
   return (
     <div className="input_container">
-      <div className="input_title">Card Tilt</div>
+      <div className="flex items-center gap-2">
+        <div className="input_title">Card Tilt</div>
+        <PremiumPlate />
+      </div>
       <Slider
         value={selectedNumber}
         onChange={handleChange}
