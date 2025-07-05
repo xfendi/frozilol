@@ -4,8 +4,9 @@ import { LocationEditIcon } from "lucide-react";
 import { MdDescription } from "react-icons/md";
 import BackgroundEffectSelector from "./effects/BackgroundEffectSelector";
 import UsernameEffectButton from "./effects/UsernameEffectButton";
+import CardTiltChange from "./effects/CardTiltChange";
 
-const GeneralInfoSection = ({
+const GeneralSection = ({
   editData,
   updateEditData,
   profile,
@@ -106,4 +107,4 @@ const GeneralInfoSection = ({
   );
 };
 
-export default GeneralInfoSection;
+export default GeneralSection;

@@ -5,9 +5,15 @@ export type CustomizeDataType = {
   linkStyle: (typeof linkStyles)[number];
   description: string;
   location: string;
+  cardTilt: number;
   effects: {
     bg: OptionType["value"];
   };
+
+  discordPresenceEnabled: boolean;
+  discordAvatarEnabled: boolean;
+  discordDecorationEnabled: boolean;
+  volumeControlEnabled: boolean;
 };
 
 export const defaultCustomizeData: CustomizeDataType = {
@@ -15,9 +21,15 @@ export const defaultCustomizeData: CustomizeDataType = {
   linkStyle: "icons",
   description: "",
   location: "",
+  cardTilt: 50,
   effects: {
     bg: "none",
   },
+
+  discordPresenceEnabled: false,
+  discordAvatarEnabled: false,
+  discordDecorationEnabled: false,
+  volumeControlEnabled: false,
 };
 
 export const themes = ["card", "clear"];

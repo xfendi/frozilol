@@ -13,7 +13,8 @@ import "@/styles/profile.css";
 import ThemeSection from "@/components/dashboard/customize/ThemeSection";
 import AssetsSection from "@/components/dashboard/customize/AssetsSection";
 import PremiumWrapper from "@/components/global/premiumWrapper";
-import GeneralInfoSection from "@/components/dashboard/customize/GeneralInfoSection";
+import GeneralSection from "@/components/dashboard/customize/GeneralSection";
+import OtherSection from "@/components/dashboard/customize/OtherSection";
 
 const CustomizePage = () => {
   const [editData, setEditData] = useState<CustomizeDataType | null>();
@@ -106,7 +107,12 @@ const CustomizePage = () => {
           />
         </PremiumWrapper>
         <AssetsSection />
-        <GeneralInfoSection
+        <GeneralSection
+          editData={editData}
+          updateEditData={updateEditData}
+          profile={profile}
+        />
+        <OtherSection
           editData={editData}
           updateEditData={updateEditData}
           profile={profile}
