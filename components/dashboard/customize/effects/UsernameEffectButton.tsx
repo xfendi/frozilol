@@ -1,12 +1,14 @@
-import { OptionType } from "@/components/global/dropdownMenu";
-import Modal from "@/components/global/modal";
 import React, { useEffect, useState } from "react";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { MdBlock } from "react-icons/md";
+import toast from "react-hot-toast";
 
 import "@/styles/effects.css";
+
+import { OptionType } from "@/components/global/dropdownMenu";
+import Modal from "@/components/global/modal";
 import TypewriterText from "@/components/effects/typewriter";
-import toast from "react-hot-toast";
+import DiamondPlate from "@/components/global/plates/diamondPlate";
 
 export const UsernameEffectOptions = [
   {
@@ -177,11 +179,7 @@ const UsernameEffectButton = ({
                     />
                   )}
                   {UsernameEffectData.find((e) => e.value === option.value)
-                    ?.premium && (
-                    <div className="bg-[rgb(255,102,178)] !text-white !w-6 !h-6 rounded-md flex justify-center items-center absolute -top-3 -right-3">
-                      💎
-                    </div>
-                  )}
+                    ?.premium && <DiamondPlate />}
                 </button>
               ))}
             </div>

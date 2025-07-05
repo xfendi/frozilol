@@ -4,7 +4,7 @@ import { LocationEditIcon } from "lucide-react";
 import { MdDescription } from "react-icons/md";
 import BackgroundEffectSelector from "./effects/BackgroundEffectSelector";
 import UsernameEffectButton from "./effects/UsernameEffectButton";
-import CardTiltChange from "./effects/CardTiltChange";
+import GlowEffect from "./effects/GlowEffect";
 
 const GeneralSection = ({
   editData,
@@ -95,6 +95,11 @@ const GeneralSection = ({
             </div>
             <div className="flex flex-col gap-4 flex-1">
               <UsernameEffectButton
+                editData={editData}
+                updateEditData={updateEditData}
+                profile={profile}
+              />
+              <GlowEffect
                 editData={editData}
                 updateEditData={updateEditData}
                 profile={profile}
